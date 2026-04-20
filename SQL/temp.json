@@ -1,0 +1,158 @@
+{
+"id": "tt34378301",
+"type": "movie",
+"primaryTitle": "Tom Clancy's Jack Ryan: Ghost War",
+"originalTitle": "Jack Ryan: Ghost War",
+"primaryImage": {
+  "url": "https://m.media-amazon.com/images/M/MV5BZGVkZjAxMzYtNGE5YS00ZWEwLTk0NGMtY2Q4MWJiN2YyZDA2XkEyXkFqcGc@._V1_.jpg",
+  "width": 2000,
+  "height": 3000
+},
+"startYear": 2026,
+"runtimeSeconds": 6300,
+"genres": [
+  "Action",
+  "Drama",
+  "Thriller"
+],
+"plot": "Follows Jack Ryan who reunites with CIA operatives to navigate a treacherous web of betrayal against an enemy who knows their every move, facing a past they thought was long put to rest.",
+"directors": [
+  {
+    "id": "nm0076997",
+    "displayName": "Andrew Bernstein",
+    "primaryProfessions": [
+      "assistant_director",
+      "director",
+      "producer"
+    ]
+  }
+],
+"writers": [
+  {
+    "id": "nm2410105",
+    "displayName": "Aaron Rabin",
+    "primaryImage": {
+      "url": "https://m.media-amazon.com/images/M/MV5BYzExZDIyNjItYTcyYi00OTRhLTllMDItY2IyODM4NDU5MjAwXkEyXkFqcGc@._V1_CR2058,1099,2255,3383_.jpg",
+      "width": 2255,
+      "height": 3383
+    },
+    "primaryProfessions": [
+      "director",
+      "producer",
+      "writer"
+    ]
+  },
+  {
+    "id": "nm1024677",
+    "displayName": "John Krasinski",
+    "alternativeNames": [
+      "James Halpert"
+    ],
+    "primaryImage": {
+      "url": "https://m.media-amazon.com/images/M/MV5BMTc3MzY3MjQ3OV5BMl5BanBnXkFtZTcwODI3NjQxMw@@._V1_.jpg",
+      "width": 287,
+      "height": 400
+    },
+    "primaryProfessions": [
+      "actor",
+      "producer",
+      "writer"
+    ]
+  },
+  {
+    "id": "nm3834300",
+    "displayName": "Noah Oppenheim",
+    "primaryImage": {
+      "url": "https://m.media-amazon.com/images/M/MV5BMzk3MDhiMjYtZGRiMi00YzFjLThhZGItNGFmNWRiNmRiOTc2XkEyXkFqcGc@._V1_.jpg",
+      "width": 1566,
+      "height": 881
+    },
+    "primaryProfessions": [
+      "executive",
+      "producer",
+      "writer"
+    ]
+  }
+],
+"stars": [
+  {
+    "id": "nm1024677",
+    "displayName": "John Krasinski",
+    "alternativeNames": [
+      "James Halpert"
+    ],
+    "primaryImage": {
+      "url": "https://m.media-amazon.com/images/M/MV5BMTc3MzY3MjQ3OV5BMl5BanBnXkFtZTcwODI3NjQxMw@@._V1_.jpg",
+      "width": 287,
+      "height": 400
+    },
+    "primaryProfessions": [
+      "actor",
+      "producer",
+      "writer"
+    ]
+  },
+  {
+    "id": "nm1092227",
+    "displayName": "Sienna Miller",
+    "alternativeNames": [
+      "Sienna Rose Miller",
+      "Sienna Rose"
+    ],
+    "primaryImage": {
+      "url": "https://m.media-amazon.com/images/M/MV5BYmJmOGYzYjgtYTVmNC00OGVkLWJmMDAtMmU1YzAyYTllOWVlXkEyXkFqcGc@._V1_.jpg",
+      "width": 421,
+      "height": 631
+    },
+    "primaryProfessions": [
+      "actress",
+      "miscellaneous",
+      "producer"
+    ]
+  },
+  {
+    "id": "nm0446672",
+    "displayName": "Michael Kelly",
+    "alternativeNames": [
+      "Michael J. Kelly",
+      "Michael Joseph Kelly"
+    ],
+    "primaryImage": {
+      "url": "https://m.media-amazon.com/images/M/MV5BM2M2NTA4NjAtYzhiYi00NDMwLWE1ZmYtM2JkNzJmNmZkZjE5XkEyXkFqcGc@._V1_.jpg",
+      "width": 2684,
+      "height": 4026
+    },
+    "primaryProfessions": [
+      "actor",
+      "producer",
+      "soundtrack"
+    ]
+  },
+  {
+    "id": "nm0682495",
+    "displayName": "Wendell Pierce",
+    "primaryImage": {
+      "url": "https://m.media-amazon.com/images/M/MV5BMTg4NjI5NzM2N15BMl5BanBnXkFtZTcwODI3NDUxOQ@@._V1_.jpg",
+      "width": 1362,
+      "height": 2048
+    },
+    "primaryProfessions": [
+      "actor",
+      "director",
+      "producer"
+    ]
+  }
+],
+"originCountries": [
+  {
+    "code": "US",
+    "name": "United States"
+  }
+],
+"spokenLanguages": [
+  {
+    "code": "eng",
+    "name": "English"
+  }
+]
+}
