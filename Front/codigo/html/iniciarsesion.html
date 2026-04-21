@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JAMAJO | Iniciar sesion</title>
+    <meta
+      name="description"
+      content="Entrada de sesion de JAMAJO, preparada para acceso, biblioteca, listas y perfil."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              paper: '#FAF8F6',
+              mist: '#E2DEDD',
+              slate: '#5A6362',
+              ink: '#000000',
+              'deep-teal': '#023334',
+            },
+            fontFamily: {
+              sans: ['Arimo', 'sans-serif'],
+            },
+          },
+        },
+      }
+    </script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/iniciarsesion.css" />
+  </head>
+  <body class="bg-paper font-sans text-ink">
+    <div class="site-shell">
+      <header id="site-header"></header>
+      <main class="basic-page shell-width" id="page-iniciarsesion">
+        <section class="basic-page__grid">
+          <article class="basic-page__card">
+            <div class="eyebrow">Pagina</div>
+            <h2>Iniciar sesion</h2>
+          </article>
+        </section>
+      </main>
+      <footer id="site-footer"></footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="../js/script.js" defer></script>
+    <script src="../js/iniciarsesion.js" defer></script>
+  </body>
+</html>

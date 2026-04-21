@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JAMAJO | Index</title>
+    <meta
+      name="description"
+      content="Portada editorial para JAMAJO, plataforma de peliculas y series basada en compra individual y descubrimiento."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              paper: '#FAF8F6',
+              mist: '#E2DEDD',
+              slate: '#5A6362',
+              ink: '#000000',
+              'deep-teal': '#023334',
+            },
+            fontFamily: {
+              sans: ['Arimo', 'sans-serif'],
+            },
+          },
+        },
+      }
+    </script>
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/index.css" />
+  </head>
+  <body class="bg-paper font-sans text-ink">
+    <div class="site-shell">
+      <header id="site-header"></header>
+      <main id="page-index">
+        <section class="hero-grid shell-width">
+          <article class="hero-main" id="inicio" data-reveal>
+            <div class="hero-main__inner">
+              <div class="hero-copy">
+                <div>
+                  <div class="hero-badge">Index editorial</div>
+                  <div class="eyebrow" style="margin-top: 30px;">Descubrimiento + compra individual</div>
+                  <h1 class="hero-copy__title">Cine y series con pulso editorial.</h1>
+                  <p class="hero-copy__body">
+                    El index ya queda planteado como portada real del proyecto: claro, cinematografico,
+                    minimalista y preparado para que despues entren enlaces, busqueda, cards y datos reales.
+                  </p>
+                </div>
+
+                <div class="hero-pillars">
+                  <article class="hero-pillar">
+                    <div class="eyebrow">Compra individual</div>
+                    <div class="hero-pillar__title">El contenido se compra o se reserva.</div>
+                  </article>
+                  <article class="hero-pillar">
+                    <div class="eyebrow">Sistema social</div>
+                    <div class="hero-pillar__title">Ratings y resenas mueven ranking y tendencia.</div>
+                  </article>
+                  <article class="hero-pillar">
+                    <div class="eyebrow">Descubrimiento</div>
+                    <div class="hero-pillar__title">Categorias, reparto y similitud conectan todo.</div>
+                  </article>
+                </div>
+              </div>
+
+              <div class="hero-posters">
+                <!-- TODO(back): aqui luego entran poster principal, titulo real y CTA del hero. -->
+                <article class="hero-poster">
+                  <div class="hero-poster__meta">Home editorial</div>
+                  <div class="hero-poster__title">Curaduria viva</div>
+                  <div class="hero-poster__note">Poster real pendiente</div>
+                </article>
+                <article class="hero-poster">
+                  <div class="hero-poster__meta">Compra individual</div>
+                  <div class="hero-poster__title">Biblioteca propia</div>
+                  <div class="hero-poster__note">Poster real pendiente</div>
+                </article>
+                <article class="hero-poster">
+                  <div class="hero-poster__meta">Categorias y reparto</div>
+                  <div class="hero-poster__title">Descubrimiento conectado</div>
+                  <div class="hero-poster__note">Poster real pendiente</div>
+                </article>
+              </div>
+            </div>
+          </article>
+
+          <aside class="hero-side" data-reveal>
+            <section class="hero-spotlight">
+              <div class="eyebrow" style="color: rgba(255,255,255,0.54);">Destacado</div>
+              <div class="hero-spotlight__list">
+                <a
+                  class="hero-spotlight__item"
+                  href="#explorar"
+                  data-search-item
+                  data-search-title="Trending del momento"
+                  data-search-category="Actividad reciente"
+                  data-search-note="Mezcla de compras, vistas y resenas."
+                >
+                  <div>
+                    <div class="eyebrow" style="color: rgba(255,255,255,0.54);">Actividad reciente</div>
+                    <div class="hero-spotlight__item-title">Trending del momento</div>
+                    <div class="hero-spotlight__item-note">Mezcla de compras, vistas y resenas.</div>
+                  </div>
+                  <div aria-hidden="true">-&gt;</div>
+                </a>
+
+                <a
+                  class="hero-spotlight__item"
+                  href="#peliculas"
+                  data-search-item
+                  data-search-title="Mejor valoradas"
+                  data-search-category="Ranking"
+                  data-search-note="Promedio de puntuaciones y volumen social."
+                >
+                  <div>
+                    <div class="eyebrow" style="color: rgba(255,255,255,0.54);">Ranking</div>
+                    <div class="hero-spotlight__item-title">Mejor valoradas</div>
+                    <div class="hero-spotlight__item-note">Promedio de puntuaciones y volumen social.</div>
+                  </div>
+                  <div aria-hidden="true">-&gt;</div>
+                </a>
+
+                <a
+                  class="hero-spotlight__item"
+                  href="#explorar"
+                  data-search-item
+                  data-search-title="Colecciones y listas"
+                  data-search-category="Organizacion personal"
+                  data-search-note="Favoritos, ver despues y listas personalizadas."
+                >
+                  <div>
+                    <div class="eyebrow" style="color: rgba(255,255,255,0.54);">Organizacion personal</div>
+                    <div class="hero-spotlight__item-title">Colecciones y listas</div>
+                    <div class="hero-spotlight__item-note">Favoritos, ver despues y listas personalizadas.</div>
+                  </div>
+                  <div aria-hidden="true">-&gt;</div>
+                </a>
+
+                <a
+                  class="hero-spotlight__item"
+                  href="#categorias"
+                  data-search-item
+                  data-search-title="Reparto y directores"
+                  data-search-category="Navegacion"
+                  data-search-note="Filmografias y relaciones entre contenidos."
+                >
+                  <div>
+                    <div class="eyebrow" style="color: rgba(255,255,255,0.54);">Navegacion</div>
+                    <div class="hero-spotlight__item-title">Reparto y directores</div>
+                    <div class="hero-spotlight__item-note">Filmografias y relaciones entre contenidos.</div>
+                  </div>
+                  <div aria-hidden="true">-&gt;</div>
+                </a>
+              </div>
+            </section>
+
+            <section class="hero-system">
+              <div class="hero-system__chips">
+                <span class="hero-system__chip">peliculas</span>
+                <span class="hero-system__chip">series</span>
+                <span class="hero-system__chip">reparto</span>
+                <span class="hero-system__chip">categorias</span>
+              </div>
+
+              <div class="hero-system__copy">
+                <h2>Una base simple, pero con sentido real.</h2>
+                <p>
+                  Nada queda pintado por pintar. Cada bloque del index ya prepara su futura
+                  pagina, su futura logica y su futura conexion con backend.
+                </p>
+              </div>
+            </section>
+          </aside>
+        </section>
+
+        <section class="section-space shell-width intro-section" data-reveal>
+          <div class="intro-section__grid">
+            <div>
+              <div class="eyebrow">Explorar</div>
+              <h2>Un index que mezcla curaduria y sistema.</h2>
+            </div>
+            <p>
+              Las filas de abajo ya ordenan peliculas, series y descubrimiento con una logica clara.
+              Luego solo habra que sustituir placeholders por titulos, portadas, estados y rutas reales.
+            </p>
+          </div>
+        </section>
+
+        <section class="section-space shell-width">
+          <section class="shelf" id="series" data-reveal>
+            <div class="shelf__header">
+              <div>
+                <div class="eyebrow">Series</div>
+                <h3>Continuidad, temporadas y proximos accesos</h3>
+                <p>Fila pensada para series que viven por temporadas, categorias y continuidad de visionado.</p>
+              </div>
+              <div class="shelf__actions">
+                <button class="shelf__button" type="button" data-rail-prev="series" aria-label="Mover carrusel a la izquierda">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                    <path d="m15 6-6 6 6 6"></path>
+                  </svg>
+                </button>
+                <button class="shelf__button" type="button" data-rail-next="series" aria-label="Mover carrusel a la derecha">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                    <path d="m9 6 6 6-6 6"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="shelf__rail" data-rail="series">
+              <!-- TODO(back): cada tarjeta debe consumir portada, slug, precio/estado y enlace real. -->
+              <a class="poster-card" href="#series" data-card data-search-item data-search-title="Trending" data-search-category="Actividad" data-search-note="Serie destacada">
+                <div class="poster-card__visual poster-card__visual--tone-a">
+                  <div class="poster-card__topline">
+                    <div class="poster-card__badge">Actividad</div>
+                    <div class="poster-card__status">trending</div>
+                  </div>
+                  <div class="poster-card__content">
+                    <div class="poster-card__kind">Serie</div>
+                    <div class="poster-card__title">Trending</div>
+                    <div class="poster-card__footer">
+                      <div class="poster-card__note">Serie destacada</div>
+                      <div aria-hidden="true">-&gt;</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a class="poster-card" href="#series" data-card data-search-item data-search-title="Drama" data-search-category="Categoria" data-search-note="Serie destacada">
+                <div class="poster-card__visual poster-card__visual--tone-b">
+                  <div class="poster-card__topline">
+                    <div class="poster-card__badge">Categoria</div>
+                    <div class="poster-card__status">catalogo</div>
+                  </div>
+                  <div class="poster-card__content">
+                    <div class="poster-card__kind">Serie</div>
+                    <div class="poster-card__title">Drama</div>
+                    <div class="poster-card__footer">
+                      <div class="poster-card__note">Serie destacada</div>
+                      <div aria-hidden="true">-&gt;</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a class="poster-card" href="#series" data-card data-search-item data-search-title="Anime" data-search-category="Categoria" data-search-note="Serie destacada">
+                <div class="poster-card__visual poster-card__visual--tone-c">
+                  <div class="poster-card__topline">
+                    <div class="poster-card__badge">Categoria</div>
+                    <div class="poster-card__status">catalogo</div>
+                  </div>
+                  <div class="poster-card__content">
+                    <div class="poster-card__kind">Serie</div>
+                    <div class="poster-card__title">Anime</div>
+                    <div class="poster-card__footer">
+                      <div class="poster-card__note">Serie destacada</div>
+                      <div aria-hidden="true">-&gt;</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a class="poster-card" href="#series" data-card data-search-item data-search-title="Suspense" data-search-category="Categoria" data-search-note="Serie destacada">
+                <div class="poster-card__visual poster-card__visual--tone-d">
+                  <div class="poster-card__topline">
+                    <div class="poster-card__badge">Categoria</div>
+                    <div class="poster-card__status">catalogo</div>
+                  </div>
+                  <div class="poster-card__content">
+                    <div class="poster-card__kind">Serie</div>
+                    <div class="poster-card__title">Suspense</div>
+                    <div class="poster-card__footer">
+                      <div class="poster-card__note">Serie destacada</div>
+                      <div aria-hidden="true">-&gt;</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a class="poster-card" href="#series" data-card data-search-item data-search-title="Juvenil" data-search-category="Categoria" data-search-note="Serie destacada">
+                <div class="poster-card__visual poster-card__visual--tone-a">
+                  <div class="poster-card__topline">
+                    <div class="poster-card__badge">Categoria</div>
+                    <div class="poster-card__status">catalogo</div>
+                  </div>
+                  <div class="poster-card__content">
+                    <div class="poster-card__kind">Serie</div>
+                    <div class="poster-card__title">Juvenil</div>
+                    <div class="poster-card__footer">
+                      <div class="poster-card__note">Serie destacada</div>
+                      <div aria-hidden="true">-&gt;</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a class="poster-card" href="#series" data-card data-search-item data-search-title="Proximamente" data-search-category="Reserva" data-search-note="Serie reservable">
+                <div class="poster-card__visual poster-card__visual--tone-b">
+                  <div class="poster-card__topline">
+                    <div class="poster-card__badge">Reserva</div>
+                    <div class="poster-card__status">coming soon</div>
+                  </div>
+                  <div class="poster-card__content">
+                    <div class="poster-card__kind">Serie</div>
+                    <div class="poster-card__title">Proximamente</div>
+                    <div class="poster-card__footer">
+                      <div class="poster-card__note">Serie reservable</div>
+                      <div aria-hidden="true">-&gt;</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </section>
+
+          <section class="shelf section-space" id="peliculas" data-reveal>
+            <div class="shelf__header">
+              <div>
+                <div class="eyebrow">Peliculas</div>
+                <h3>Compra individual, ranking y estrenos</h3>
+                <p>Fila pensada para compra directa, mejor valoradas, peliculas nuevas y reservas futuras.</p>
+              </div>
+              <div class="shelf__actions">
+                <button class="shelf__button" type="button" data-rail-prev="peliculas" aria-label="Mover carrusel a la izquierda">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                    <path d="m15 6-6 6 6 6"></path>
+                  </svg>
+                </button>
+                <button class="shelf__button" type="button" data-rail-next="peliculas" aria-label="Mover carrusel a la derecha">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                    <path d="m9 6 6 6-6 6"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="shelf__rail" data-rail="peliculas">
+              <a class="poster-card" href="#peliculas" data-card data-search-item data-search-title="Mejor valoradas" data-search-category="Ranking" data-search-note="Pelicula destacada">
+                <div class="poster-card__visual poster-card__visual--tone-a">
+                  <div class="poster-card__topline">
+                    <div class="poster-card__badge">Ranking</div>
+                    <div class="poster-card__status">ranking</div>
+                  </div>
+                  <div class="poster-card__content">
+                    <div class="poster-card__kind">Pelicula</div>
+                    <div class="poster-card__title">Mejor valoradas</div>
+                    <div class="poster-card__footer">
+                      <div class="poster-card__note">Pelicula destacada</div>
+                      <div aria-hidden="true">-&gt;</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a class="poster-card" href="#peliculas" data-card data-search-item data-search-title="Accion" data-search-category="Categoria" data-search-note="Pelicula destacada">
+                <div class="poster-card__visual poster-card__visual--tone-b">
+                  <div class="poster-card__topline">
+                    <div class="poster-card__badge">Categoria</div>
+                    <div class="poster-card__status">catalogo</div>
+                  </div>
+                  <div class="poster-card__content">
+                    <div class="poster-card__kind">Pelicula</div>
+                    <div class="poster-card__title">Accion</div>
+                    <div class="poster-card__footer">
+                      <div class="poster-card__note">Pelicula destacada</div>
+                      <div aria-hidden="true">-&gt;</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a class="poster-card" href="#peliculas" data-card data-search-item data-search-title="Romance" data-search-category="Categoria" data-search-note="Pelicula destacada">
+                <div class="poster-card__visual poster-card__visual--tone-c">
+                  <div class="poster-card__topline">
+                    <div class="poster-card__badge">Categoria</div>
+                    <div class="poster-card__status">catalogo</div>
+                  </div>
+                  <div class="poster-card__content">
+                    <div class="poster-card__kind">Pelicula</div>
+                    <div class="poster-card__title">Romance</div>
+                    <div class="poster-card__footer">
+                      <div class="poster-card__note">Pelicula destacada</div>
+                      <div aria-hidden="true">-&gt;</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a class="poster-card" href="#peliculas" data-card data-search-item data-search-title="Crimen" data-search-category="Categoria" data-search-note="Pelicula destacada">
+                <div class="poster-card__visual poster-card__visual--tone-d">
+                  <div class="poster-card__topline">
+                    <div class="poster-card__badge">Categoria</div>
+                    <div class="poster-card__status">catalogo</div>
+                  </div>
+                  <div class="poster-card__content">
+                    <div class="poster-card__kind">Pelicula</div>
+                    <div class="poster-card__title">Crimen</div>
+                    <div class="poster-card__footer">
+                      <div class="poster-card__note">Pelicula destacada</div>
+                      <div aria-hidden="true">-&gt;</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a class="poster-card" href="#peliculas" data-card data-search-item data-search-title="Clasico" data-search-category="Categoria" data-search-note="Pelicula destacada">
+                <div class="poster-card__visual poster-card__visual--tone-a">
+                  <div class="poster-card__topline">
+                    <div class="poster-card__badge">Categoria</div>
+                    <div class="poster-card__status">catalogo</div>
+                  </div>
+                  <div class="poster-card__content">
+                    <div class="poster-card__kind">Pelicula</div>
+                    <div class="poster-card__title">Clasico</div>
+                    <div class="poster-card__footer">
+                      <div class="poster-card__note">Pelicula destacada</div>
+                      <div aria-hidden="true">-&gt;</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a class="poster-card" href="#peliculas" data-card data-search-item data-search-title="Estrenos" data-search-category="Lanzamiento" data-search-note="Pelicula nueva">
+                <div class="poster-card__visual poster-card__visual--tone-b">
+                  <div class="poster-card__topline">
+                    <div class="poster-card__badge">Lanzamiento</div>
+                    <div class="poster-card__status">new</div>
+                  </div>
+                  <div class="poster-card__content">
+                    <div class="poster-card__kind">Pelicula</div>
+                    <div class="poster-card__title">Estrenos</div>
+                    <div class="poster-card__footer">
+                      <div class="poster-card__note">Pelicula nueva</div>
+                      <div aria-hidden="true">-&gt;</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </section>
+
+          <section class="shelf section-space" id="explorar" data-reveal>
+            <div class="shelf__header">
+              <div>
+                <div class="eyebrow">Explorar</div>
+                <h3>Categorias, reparto y relaciones</h3>
+                <p>Fila para descubrimiento transversal: similitud, personas, listas y comportamiento del usuario.</p>
+              </div>
+              <div class="shelf__actions">
+                <button class="shelf__button" type="button" data-rail-prev="explorar" aria-label="Mover carrusel a la izquierda">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                    <path d="m15 6-6 6 6 6"></path>
+                  </svg>
+                </button>
+                <button class="shelf__button" type="button" data-rail-next="explorar" aria-label="Mover carrusel a la derecha">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                    <path d="m9 6 6 6-6 6"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="shelf__rail" data-rail="explorar">
+              <a class="poster-card" href="#categorias" data-card data-search-item data-search-title="Reparto" data-search-category="Personas" data-search-note="Actor y director">
+                <div class="poster-card__visual poster-card__visual--tone-a">
+                  <div class="poster-card__topline">
+                    <div class="poster-card__badge">Personas</div>
+                    <div class="poster-card__status">personas</div>
+                  </div>
+                  <div class="poster-card__content">
+                    <div class="poster-card__kind">Contenido</div>
+                    <div class="poster-card__title">Reparto</div>
+                    <div class="poster-card__footer">
+                      <div class="poster-card__note">Actor y director</div>
+                      <div aria-hidden="true">-&gt;</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a class="poster-card" href="#explorar" data-card data-search-item data-search-title="Listas" data-search-category="Organizacion" data-search-note="Favoritos y ver despues">
+                <div class="poster-card__visual poster-card__visual--tone-b">
+                  <div class="poster-card__topline">
+                    <div class="poster-card__badge">Organizacion</div>
+                    <div class="poster-card__status">colecciones</div>
+                  </div>
+                  <div class="poster-card__content">
+                    <div class="poster-card__kind">Contenido</div>
+                    <div class="poster-card__title">Listas</div>
+                    <div class="poster-card__footer">
+                      <div class="poster-card__note">Favoritos y ver despues</div>
+                      <div aria-hidden="true">-&gt;</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a class="poster-card" href="#explorar" data-card data-search-item data-search-title="Similares" data-search-category="Relacion" data-search-note="Categorias en comun">
+                <div class="poster-card__visual poster-card__visual--tone-c">
+                  <div class="poster-card__topline">
+                    <div class="poster-card__badge">Relacion</div>
+                    <div class="poster-card__status">similitud</div>
+                  </div>
+                  <div class="poster-card__content">
+                    <div class="poster-card__kind">Contenido</div>
+                    <div class="poster-card__title">Similares</div>
+                    <div class="poster-card__footer">
+                      <div class="poster-card__note">Categorias en comun</div>
+                      <div aria-hidden="true">-&gt;</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a class="poster-card" href="#explorar" data-card data-search-item data-search-title="Para ti" data-search-category="Comportamiento" data-search-note="Recomendacion">
+                <div class="poster-card__visual poster-card__visual--tone-d">
+                  <div class="poster-card__topline">
+                    <div class="poster-card__badge">Comportamiento</div>
+                    <div class="poster-card__status">recomendado</div>
+                  </div>
+                  <div class="poster-card__content">
+                    <div class="poster-card__kind">Contenido</div>
+                    <div class="poster-card__title">Para ti</div>
+                    <div class="poster-card__footer">
+                      <div class="poster-card__note">Recomendacion</div>
+                      <div aria-hidden="true">-&gt;</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a class="poster-card" href="#explorar" data-card data-search-item data-search-title="Popularidad" data-search-category="Metricas" data-search-note="Compras y vistas">
+                <div class="poster-card__visual poster-card__visual--tone-a">
+                  <div class="poster-card__topline">
+                    <div class="poster-card__badge">Metricas</div>
+                    <div class="poster-card__status">tendencia</div>
+                  </div>
+                  <div class="poster-card__content">
+                    <div class="poster-card__kind">Contenido</div>
+                    <div class="poster-card__title">Popularidad</div>
+                    <div class="poster-card__footer">
+                      <div class="poster-card__note">Compras y vistas</div>
+                      <div aria-hidden="true">-&gt;</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <a class="poster-card" href="#explorar" data-card data-search-item data-search-title="Resenas" data-search-category="Sistema social" data-search-note="Comentarios del usuario">
+                <div class="poster-card__visual poster-card__visual--tone-b">
+                  <div class="poster-card__topline">
+                    <div class="poster-card__badge">Sistema social</div>
+                    <div class="poster-card__status">social</div>
+                  </div>
+                  <div class="poster-card__content">
+                    <div class="poster-card__kind">Contenido</div>
+                    <div class="poster-card__title">Resenas</div>
+                    <div class="poster-card__footer">
+                      <div class="poster-card__note">Comentarios del usuario</div>
+                      <div aria-hidden="true">-&gt;</div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </section>
+        </section>
+
+        <section class="section-space shell-width categories-section" id="categorias">
+          <article class="categories-aside" data-reveal>
+            <div class="eyebrow">Categorias</div>
+            <h3>Un mapa flexible para descubrir mejor.</h3>
+            <p>
+              Esta zona deja preparada la navegacion por genero, mezcla de categorias, reparto y relaciones
+              entre contenidos sin depender todavia de datos reales.
+            </p>
+
+            <div class="categories-note">
+              <article>
+                <div class="eyebrow">Luego</div>
+                <h4>Conteos y filtros vivos</h4>
+                <p>Aqui entran datos reales de peliculas, series, rankings y disponibilidad.</p>
+              </article>
+              <article>
+                <div class="eyebrow">Despues</div>
+                <h4>Similitud y personas</h4>
+                <p>La misma estructura soporta exploracion por actores, directores y contenido relacionado.</p>
+              </article>
+            </div>
+          </article>
+
+          <article class="categories-grid" data-reveal>
+            <div class="categories-grid__inner">
+              <a class="category-card category-card--accent" href="#categorias" data-search-item data-search-title="Drama" data-search-category="Categoria" data-search-note="Exploracion por genero">
+                <div class="category-card__title">Drama</div>
+                <div class="category-card__tags"><span>Series</span><span>Peliculas</span></div>
+              </a>
+              <a class="category-card" href="#categorias" data-search-item data-search-title="Comedia" data-search-category="Categoria" data-search-note="Exploracion por genero">
+                <div class="category-card__title">Comedia</div>
+                <div class="category-card__tags"><span>Series</span><span>Peliculas</span></div>
+              </a>
+              <a class="category-card" href="#categorias" data-search-item data-search-title="Accion" data-search-category="Categoria" data-search-note="Exploracion por genero">
+                <div class="category-card__title">Accion</div>
+                <div class="category-card__tags"><span>Series</span><span>Peliculas</span></div>
+              </a>
+              <a class="category-card" href="#categorias" data-search-item data-search-title="Terror / Horror" data-search-category="Categoria" data-search-note="Exploracion por genero">
+                <div class="category-card__title">Terror / Horror</div>
+                <div class="category-card__tags"><span>Series</span><span>Peliculas</span></div>
+              </a>
+              <a class="category-card category-card--accent" href="#categorias" data-search-item data-search-title="Suspense / Thriller" data-search-category="Categoria" data-search-note="Exploracion por genero">
+                <div class="category-card__title">Suspense / Thriller</div>
+                <div class="category-card__tags"><span>Series</span><span>Peliculas</span></div>
+              </a>
+              <a class="category-card" href="#categorias" data-search-item data-search-title="Romance" data-search-category="Categoria" data-search-note="Exploracion por genero">
+                <div class="category-card__title">Romance</div>
+                <div class="category-card__tags"><span>Series</span><span>Peliculas</span></div>
+              </a>
+              <a class="category-card" href="#categorias" data-search-item data-search-title="Familiar" data-search-category="Categoria" data-search-note="Exploracion por genero">
+                <div class="category-card__title">Familiar</div>
+                <div class="category-card__tags"><span>Series</span><span>Peliculas</span></div>
+              </a>
+              <a class="category-card" href="#categorias" data-search-item data-search-title="Juvenil / Teen" data-search-category="Categoria" data-search-note="Exploracion por genero">
+                <div class="category-card__title">Juvenil / Teen</div>
+                <div class="category-card__tags"><span>Series</span><span>Peliculas</span></div>
+              </a>
+              <a class="category-card category-card--accent" href="#categorias" data-search-item data-search-title="Ciencia ficcion" data-search-category="Categoria" data-search-note="Exploracion por genero">
+                <div class="category-card__title">Ciencia ficcion</div>
+                <div class="category-card__tags"><span>Series</span><span>Peliculas</span></div>
+              </a>
+              <a class="category-card" href="#categorias" data-search-item data-search-title="Fantasia" data-search-category="Categoria" data-search-note="Exploracion por genero">
+                <div class="category-card__title">Fantasia</div>
+                <div class="category-card__tags"><span>Series</span><span>Peliculas</span></div>
+              </a>
+              <a class="category-card" href="#categorias" data-search-item data-search-title="Crimen / Policial" data-search-category="Categoria" data-search-note="Exploracion por genero">
+                <div class="category-card__title">Crimen / Policial</div>
+                <div class="category-card__tags"><span>Series</span><span>Peliculas</span></div>
+              </a>
+              <a class="category-card" href="#categorias" data-search-item data-search-title="Aventura" data-search-category="Categoria" data-search-note="Exploracion por genero">
+                <div class="category-card__title">Aventura</div>
+                <div class="category-card__tags"><span>Series</span><span>Peliculas</span></div>
+              </a>
+              <a class="category-card category-card--accent" href="#categorias" data-search-item data-search-title="Cine clasico" data-search-category="Categoria" data-search-note="Exploracion por genero">
+                <div class="category-card__title">Cine clasico</div>
+                <div class="category-card__tags"><span>Series</span><span>Peliculas</span></div>
+              </a>
+              <a class="category-card" href="#categorias" data-search-item data-search-title="Anime" data-search-category="Categoria" data-search-note="Exploracion por genero">
+                <div class="category-card__title">Anime</div>
+                <div class="category-card__tags"><span>Series</span><span>Peliculas</span></div>
+              </a>
+            </div>
+          </article>
+        </section>
+      </main>
+      <footer id="site-footer"></footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="../js/script.js" defer></script>
+    <script src="../js/index.js" defer></script>
+  </body>
+</html>

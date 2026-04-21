@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JAMAJO | Dashboard Admin</title>
+    <meta
+      name="description"
+      content="Panel de administracion de JAMAJO. Gestion de usuarios, contenido, transacciones y analitica."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              paper: '#FAF8F6',
+              mist: '#E2DEDD',
+              slate: '#5A6362',
+              ink: '#000000',
+              'deep-teal': '#023334',
+            },
+            fontFamily: {
+              sans: ['Arimo', 'sans-serif'],
+            },
+          },
+        },
+      }
+    </script>
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/dashboard-styles.css" />
+  </head>
+  <body class="bg-paper font-sans text-ink">
+    <div class="site-shell">
+
+      <header id="site-header"></header>
+
+      <main id="page-dashboard">
+
+        <div class="dashboard-shell">
+
+          <!-- ── Sidebar ── -->
+          <aside class="dash-sidebar">
+            <nav class="dash-nav">
+
+              <button class="dash-nav-item active" data-section="overview">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="7" height="9" x="3" y="3" rx="1"/>
+                  <rect width="7" height="5" x="14" y="3" rx="1"/>
+                  <rect width="7" height="9" x="14" y="12" rx="1"/>
+                  <rect width="7" height="5" x="3" y="16" rx="1"/>
+                </svg>
+                <span>Overview</span>
+              </button>
+
+              <button class="dash-nav-item" data-section="users">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                </svg>
+                <span>Usuarios</span>
+              </button>
+
+              <button class="dash-nav-item" data-section="content">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="18" height="18" x="3" y="3" rx="2"/>
+                  <path d="m9 8 6 4-6 4Z"/>
+                </svg>
+                <span>Contenido</span>
+              </button>
+
+              <button class="dash-nav-item" data-section="transactions">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="20" height="14" x="2" y="5" rx="2"/>
+                  <path d="M2 10h20"/>
+                </svg>
+                <span>Compras</span>
+              </button>
+
+              <button class="dash-nav-item" data-section="analytics">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 3v18h18"/>
+                  <path d="m19 9-5 5-4-4-3 3"/>
+                </svg>
+                <span>Analitica</span>
+              </button>
+
+              <button class="dash-nav-item" data-section="carts">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="8" cy="21" r="1"/>
+                  <circle cx="19" cy="21" r="1"/>
+                  <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
+                </svg>
+                <span>Carritos</span>
+              </button>
+
+              <button class="dash-nav-item dash-nav-item--sep" data-section="settings">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+                <span>Configuracion</span>
+              </button>
+
+              <button class="dash-nav-item" data-section="security">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>
+                </svg>
+                <span>Seguridad</span>
+              </button>
+
+            </nav>
+
+            <div class="dash-sidebar-footer">
+              <div class="dash-admin-badge">
+                <div class="dash-admin-avatar">A</div>
+                <div class="dash-admin-info">
+                  <span class="dash-admin-name">Admin User</span>
+                  <span class="dash-admin-role">Administrador</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          <!-- ── Main ── -->
+          <div class="dash-main">
+
+            <header class="dash-topbar">
+              <div class="dash-search">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <circle cx="11" cy="11" r="8"/>
+                  <path d="m21 21-4.3-4.3"/>
+                </svg>
+                <input type="text" placeholder="Buscar usuarios, contenido, transacciones…" />
+              </div>
+              <div class="dash-topbar-right">
+                <button class="dash-notif-btn" aria-label="Notificaciones">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/>
+                    <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>
+                  </svg>
+                  <span class="dash-notif-dot">3</span>
+                </button>
+              </div>
+            </header>
+
+            <!-- dashboard-script.js llena este div -->
+            <div class="dash-content" id="dash-content"></div>
+
+          </div>
+        </div>
+
+      </main>
+
+      <!-- Modal carrito — fuera de main para z-index limpio -->
+      <div id="cartModal" class="dash-modal">
+        <div class="dash-modal-inner">
+          <div class="dash-modal-head">
+            <h3>Editar Carrito</h3>
+            <button class="dash-modal-close" onclick="closeCartModal()" aria-label="Cerrar">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="m6 6 12 12"/>
+                <path d="M18 6 6 18"/>
+              </svg>
+            </button>
+          </div>
+          <div class="dash-modal-body" id="cartModalBody"></div>
+        </div>
+      </div>
+
+      <footer id="site-footer"></footer>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="../js/script.js" defer></script>
+    <script src="../js/dashboard-script.js" defer></script>
+  </body>
+</html>
