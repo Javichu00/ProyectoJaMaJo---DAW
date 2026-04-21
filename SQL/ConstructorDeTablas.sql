@@ -28,13 +28,16 @@ CREATE TABLE IF NOT EXISTS Usuarios (
 
 CREATE TABLE IF NOT EXISTS Contenido (
     id_contenido        BIGINT AUTO_INCREMENT PRIMARY KEY,
-    id_api          VARCHAR(20) UNIQUE NOT NULL,
+    id_api          	VARCHAR(20) UNIQUE NOT NULL,
     titulo_principal    VARCHAR(255) NOT NULL,
     id_director         BIGINT,
     tipo_contenido      ENUM('PELICULA', 'SERIE') NOT NULL,
     descripcion         TEXT,
     fecha               DATE,
     imagen_url          TEXT,
+    nota 				INT,
+    n_votos				INT,
+    trailer_url			TEXT,
 
     FOREIGN KEY (id_director) REFERENCES Trabajadores(id_trabajador) ON DELETE SET NULL
 );

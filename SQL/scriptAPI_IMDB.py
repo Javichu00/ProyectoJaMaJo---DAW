@@ -1,13 +1,15 @@
 import requests
-import json
-import random
+import os
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # ============================================================
 # CONFIGURACIÓN
 # ============================================================
 
 BASE_URL = "https://api.imdbapi.dev/titles"
-CANTIDAD = 20000
+WORKERS = 5
+IDS_ENTRADA = "ids_filtrados.txt"
+OUTPUT_SQL = "output.sql"
 
 GENEROS_ES = {
     "Action": "Acción",
@@ -38,7 +40,7 @@ GENEROS_ES = {
 # HELPERS
 # ============================================================
 
-def leer_ids_desde_txt(ruta):
+def leer_ids(ruta):
     with open(ruta, "r", encoding="utf-8") as f:
         return [linea.strip() for linea in f if linea.strip()]
 
@@ -162,14 +164,17 @@ def generar_sql(data):
     return "\n".join(bloques)
 
 # ============================================================
-# MAIN
+# PROCESAR ID
 # ============================================================
 
-from concurrent.futures import ThreadPoolExecutor, as_completed
-
-def procesar_id(id_titulo):
+def procesar_id(id_titulo, fichero_fallidos):
     try:
         response = requests.get(f"{BASE_URL}/{id_titulo}", timeout=10)
+
+        if response.status_code == 429:
+            with open(fichero_fallidos, "a", encoding="utf-8") as f:
+                f.write(id_titulo + "\n")
+            return None, f"⚠️  {id_titulo} — 429 guardado en {fichero_fallidos}"
 
         if response.status_code != 200:
             return None, f"⚠️  {id_titulo} — HTTP {response.status_code}"
@@ -184,38 +189,79 @@ def procesar_id(id_titulo):
     except Exception as e:
         return None, f"❌ {id_titulo} — {e}"
 
+# ============================================================
+# PROCESAR TANDA
+# ============================================================
 
-def main():
-    ids = leer_ids_desde_txt(CANTIDAD)
-    todos_los_bloques = []
+def procesar_tanda(ids, fichero_fallidos):
     procesados = 0
-    fallidos = 0
+    fallidos   = 0
 
-    with ThreadPoolExecutor(max_workers=60) as executor:
-        futuros = {executor.submit(procesar_id, id_titulo): id_titulo for id_titulo in ids}
+    # Inicializar output.sql con cabecera solo si no existe
+    if not os.path.exists(OUTPUT_SQL):
+        with open(OUTPUT_SQL, "w", encoding="utf-8") as f:
+            f.write("USE JAMAJO_DDBB;\n\n")
+
+    with ThreadPoolExecutor(max_workers=WORKERS) as executor:
+        futuros = {executor.submit(procesar_id, id_titulo, fichero_fallidos): id_titulo for id_titulo in ids}
 
         for futuro in as_completed(futuros):
             sql, mensaje = futuro.result()
-            print(mensaje)
 
             if sql:
-                todos_los_bloques.append(sql)
+                with open(OUTPUT_SQL, "a", encoding="utf-8") as f:
+                    f.write("\n\n" + sql)
                 procesados += 1
-                print(f"{mensaje} — ✅ {procesados} procesados / ❌ {fallidos} fallidos")
             else:
                 fallidos += 1
-                print(f"{mensaje} — ✅ {procesados} procesados / ❌ {fallidos} fallidos")
 
-    sql_final = "\n\n".join(todos_los_bloques)
+            print(f"{mensaje} — ✅ {procesados} procesados / ❌ {fallidos} fallidos")
 
-    with open("output.sql", "w", encoding="utf-8") as f:
-        f.write("USE JAMAJO_DDBB;\n\n")
-        f.write(sql_final)
+    return procesados, fallidos
 
-    print(f"\n✅ Generado output.sql")
-    print(f"   Procesados: {procesados}")
-    print(f"   Fallidos/inexistentes: {fallidos}")
+# ============================================================
+# MAIN
+# ============================================================
 
+def main():
+    ronda         = 1
+    total_procesados = 0
+    total_fallidos   = 0
+    fichero_actual   = IDS_ENTRADA
+
+    while True:
+        if not os.path.exists(fichero_actual):
+            print(f"✅ No existe {fichero_actual}, hemos terminado.")
+            break
+
+        ids = leer_ids(fichero_actual)
+
+        if not ids:
+            print(f"✅ {fichero_actual} está vacío, hemos terminado.")
+            break
+
+        fichero_fallidos = f"fallidos{ronda}.txt"
+        print(f"\n🔁 Ronda {ronda} — leyendo {fichero_actual} ({len(ids)} IDs) — fallidos → {fichero_fallidos}")
+
+        procesados, fallidos = procesar_tanda(ids, fichero_fallidos)
+        total_procesados += procesados
+        total_fallidos   += fallidos
+
+        print(f"\n   Ronda {ronda} terminada — ✅ {procesados} procesados / ❌ {fallidos} fallidos")
+
+        # La siguiente ronda lee los fallidos de esta
+        fichero_actual = fichero_fallidos
+        ronda += 1
+
+        # Si no hubo ningún fallido, paramos
+        if fallidos == 0:
+            print(f"\n🎉 Sin fallidos en la ronda {ronda - 1}, proceso completado.")
+            break
+
+    print(f"\n{'='*50}")
+    print(f"TOTAL procesados: {total_procesados}")
+    print(f"TOTAL fallidos:   {total_fallidos}")
+    print(f"Output:           {OUTPUT_SQL}")
 
 if __name__ == "__main__":
     main()
