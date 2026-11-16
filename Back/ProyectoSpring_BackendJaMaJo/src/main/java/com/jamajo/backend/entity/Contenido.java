@@ -7,6 +7,7 @@ import com.jamajo.backend.enums.TipoContenido;
 @Entity
 @Table(name = "Contenido")
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipo_contenido")
 public class Contenido {
 
     @Id
@@ -16,6 +17,9 @@ public class Contenido {
 
     @Column(name = "id_api", unique = true, nullable = false, length = 20)
     private String idApi;
+    
+    @Column(name = "id_tmdb", unique = true)
+    private Long idTmdb;
 
     @Column(name = "titulo_principal", nullable = false)
     private String tituloPrincipal;
@@ -25,7 +29,7 @@ public class Contenido {
     private Trabajador director;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_contenido", nullable = false)
+    @Column(name = "tipo_contenido", insertable = false, updatable = false)
     private TipoContenido tipoContenido;
 
     @Column(columnDefinition = "TEXT")
@@ -36,7 +40,7 @@ public class Contenido {
     @Column(name = "imagen_url", columnDefinition = "TEXT")
     private String imagenUrl;
 
-    private Integer nota;
+    private Double nota;
 
     @Column(name = "n_votos")
     private Integer nVotos;
@@ -48,7 +52,7 @@ public class Contenido {
 
     public Contenido(Long id, String idApi, String tituloPrincipal, Trabajador director,
                      TipoContenido tipoContenido, String descripcion, LocalDate fecha,
-                     String imagenUrl, Integer nota, Integer nVotos, String trailerUrl) {
+                     String imagenUrl, Double nota, Integer nVotos, String trailerUrl) {
         this.id = id;
         this.idApi = idApi;
         this.tituloPrincipal = tituloPrincipal;
@@ -67,6 +71,9 @@ public class Contenido {
 
     public String getIdApi() { return idApi; }
     public void setIdApi(String idApi) { this.idApi = idApi; }
+    
+    public Long getIdTmdb() { return idTmdb; }
+    public void setIdTmdb(Long idTmdb) { this.idTmdb = idTmdb; }
 
     public String getTituloPrincipal() { return tituloPrincipal; }
     public void setTituloPrincipal(String tituloPrincipal) { this.tituloPrincipal = tituloPrincipal; }
@@ -86,8 +93,8 @@ public class Contenido {
     public String getImagenUrl() { return imagenUrl; }
     public void setImagenUrl(String imagenUrl) { this.imagenUrl = imagenUrl; }
 
-    public Integer getNota() { return nota; }
-    public void setNota(Integer nota) { this.nota = nota; }
+    public Double getNota() { return nota; }
+    public void setNota(Double nota) { this.nota = nota; }
 
     public Integer getNVotos() { return nVotos; }
     public void setNVotos(Integer nVotos) { this.nVotos = nVotos; }

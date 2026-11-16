@@ -3,10 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JAMAJO | Series</title>
+    <title>JAM | Series</title>
+    <link rel="icon" href="../../multimedia/LogoNegro.png" type="image/png">
     <meta
       name="description"
-      content="Base visual de series para JAMAJO, preparada para temporadas, episodios, filtros y detalle."
+      content="Series de JAM con una experiencia de descubrimiento m&aacute;s inmersiva."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,11 +21,11 @@
         theme: {
           extend: {
             colors: {
-              paper: '#FAF8F6',
-              mist: '#E2DEDD',
-              slate: '#5A6362',
-              ink: '#000000',
-              'deep-teal': '#023334',
+              paper: '#000000',
+              mist: '#15120f',
+              slate: '#BEB7A4',
+              ink: '#FFFFFC',
+              'deep-teal': '#FF7F11',
             },
             fontFamily: {
               sans: ['Arimo', 'sans-serif'],
@@ -36,22 +37,90 @@
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/series.css" />
   </head>
-  <body class="bg-paper font-sans text-ink">
+  <body class="page-discovery page-series font-sans">
     <div class="site-shell">
       <header id="site-header"></header>
-      <main class="basic-page shell-width" id="page-series">
-        <section class="basic-page__grid">
-          <article class="basic-page__card">
-            <div class="eyebrow">Pagina</div>
-            <h2>Series</h2>
-          </article>
+
+      <main class="discovery-page shell-width" id="page-series">
+        <section class="discovery-stage discovery-stage--series" id="series-stage">
+          <div class="discovery-stage__backdrop" id="series-stage-backdrop" aria-hidden="true"></div>
+          <div class="discovery-stage__veil" aria-hidden="true"></div>
+
+          <div class="discovery-stage__content">
+            <div class="discovery-stage__intro">
+              <div class="discovery-stage__eyebrow" id="series-stage-kicker">Series</div>
+              <div class="discovery-stage__brand" id="series-stage-brand"></div>
+              <h1 class="discovery-stage__title" id="series-stage-title">
+                Series para engancharte sin perder tiempo buscando.
+              </h1>
+              <p class="discovery-stage__text" id="series-stage-text">
+                Entra por tendencias, maratones, veteranas o descubrimientos recientes con una navegaci&oacute;n m&aacute;s clara y &uacute;til.
+              </p>
+              <div class="discovery-stage__meta" id="series-stage-meta"></div>
+              <div class="discovery-stage__actions">
+                <a class="discovery-btn discovery-btn--primary" id="series-stage-open" href="#series-grid">
+                  Abrir destacada
+                </a>
+                <a class="discovery-btn discovery-btn--ghost" href="#series-grid">
+                  Ir al cat&aacute;logo
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="discovery-stage__selector" id="series-stage-selector" aria-label="Selector del hero"></div>
+        </section>
+
+        <div class="discovery-command">
+          <div class="discovery-command__top">
+            <label class="discovery-search" for="series-search">
+              <span class="discovery-search__label">Buscar</span>
+              <input id="series-search" type="text" placeholder="T&iacute;tulo, director o a&ntilde;o" autocomplete="off" />
+            </label>
+
+            <label class="discovery-select-wrap" for="series-sort">
+              <span class="discovery-search__label">Ordenar</span>
+              <select id="series-sort" class="discovery-select">
+                <option value="popular">M&aacute;s populares</option>
+                <option value="rating">Mejor valoradas</option>
+                <option value="newest">M&aacute;s recientes</option>
+                <option value="oldest">M&aacute;s antiguas</option>
+                <option value="az">A-Z</option>
+              </select>
+            </label>
+
+            <button id="series-reset" class="discovery-reset" type="button">Limpiar</button>
+          </div>
+
+          <p class="discovery-command__summary" id="series-summary">Preparando recomendaciones...</p>
+        </div>
+
+        <section class="discovery-shelves" id="series-shelves"></section>
+
+        <section class="discovery-results">
+          <div class="discovery-results__head">
+            <div>
+              <div class="discovery-shelf__eyebrow">Resultados</div>
+              <h2 class="discovery-shelf__title">Todo el cat&aacute;logo de series</h2>
+            </div>
+            <div class="discovery-results__meta" id="series-results-meta">-</div>
+          </div>
+
+          <div class="series-grid" id="series-grid" aria-live="polite" aria-label="Cat&aacute;logo de series"></div>
+
+          <div id="series-loadmore" class="series-loadmore" hidden>
+            <button id="btn-loadmore-series" class="series-loadmore__btn" type="button">Cargar m&aacute;s series</button>
+          </div>
         </section>
       </main>
+
       <footer id="site-footer"></footer>
     </div>
 
+    <script src="../js/api_IP.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="../js/script.js" defer></script>
+    <script src="../js/catalog-discovery.js" defer></script>
     <script src="../js/series.js" defer></script>
   </body>
 </html>

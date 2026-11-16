@@ -1,6 +1,7 @@
 package com.jamajo.backend.entity;
 
 import jakarta.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "episodio")
@@ -15,50 +16,39 @@ public class Episodio {
     @JoinColumn(name = "id_temporada", nullable = false)
     private Temporada temporada;
 
-    private Integer duracion;
+    @Column(name = "numero_episodio")
+    private Integer numeroEpisodio;
+
+    private String titulo;
 
     @Column(columnDefinition = "TEXT")
     private String descripcion;
 
-    public Episodio() {
-    }
+    private Integer duracion;
 
-    public Episodio(Long id, Temporada temporada, Integer duracion, String descripcion) {
-        this.id = id;
-        this.temporada = temporada;
-        this.duracion = duracion;
-        this.descripcion = descripcion;
-    }
+    @Column(name = "fecha_emision")
+    private LocalDate fechaEmision;
 
-    public Long getId() {
-        return id;
-    }
+    public Episodio() {}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Temporada getTemporada() {
-        return temporada;
-    }
+    public Temporada getTemporada() { return temporada; }
+    public void setTemporada(Temporada temporada) { this.temporada = temporada; }
 
-    public void setTemporada(Temporada temporada) {
-        this.temporada = temporada;
-    }
+    public Integer getNumeroEpisodio() { return numeroEpisodio; }
+    public void setNumeroEpisodio(Integer numeroEpisodio) { this.numeroEpisodio = numeroEpisodio; }
 
-    public Integer getDuracion() {
-        return duracion;
-    }
+    public String getTitulo() { return titulo; }
+    public void setTitulo(String titulo) { this.titulo = titulo; }
 
-    public void setDuracion(Integer duracion) {
-        this.duracion = duracion;
-    }
+    public String getDescripcion() { return descripcion; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+    public Integer getDuracion() { return duracion; }
+    public void setDuracion(Integer duracion) { this.duracion = duracion; }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+    public LocalDate getFechaEmision() { return fechaEmision; }
+    public void setFechaEmision(LocalDate fechaEmision) { this.fechaEmision = fechaEmision; }
 }

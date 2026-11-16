@@ -3,54 +3,32 @@ package com.jamajo.backend.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "lista")
+@Table(name = "Lista")
 public class Lista {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_lista")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "email_usuario", nullable = false)
-    private Usuario usuario;
+    @JoinColumn(name = "id_cuenta", nullable = false)
+    private Cuenta cuenta;
 
     private String nombre;
 
-    // Constructor vacío
-    public Lista() {
-    }
+    public Lista() {}
 
-    // Constructor con todos los campos
-    public Lista(Long id, Usuario usuario, String nombre) {
+    public Lista(Long id, Cuenta cuenta, String nombre) {
         this.id = id;
-        this.usuario = usuario;
+        this.cuenta = cuenta;
         this.nombre = nombre;
     }
 
-    // Getter y Setter de id
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    // Getter y Setter de usuario
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    // Getter y Setter de nombre
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public Cuenta getCuenta() { return cuenta; }
+    public void setCuenta(Cuenta cuenta) { this.cuenta = cuenta; }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 }

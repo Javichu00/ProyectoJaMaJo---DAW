@@ -1,10 +1,9 @@
 package com.jamajo.backend.service;
 
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.jamajo.backend.entity.Episodio;
 import com.jamajo.backend.repository.EpisodioRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +25,11 @@ public class EpisodioService {
         return episodioRepository.findById(id);
     }
 
+    public Optional<Episodio> findBySerieAndTemporadaAndEpisodio(
+            Long idContenido, Integer nTemporada, Integer nEpisodio) {
+        return episodioRepository.findBySerieAndTemporadaAndEpisodio(idContenido, nTemporada, nEpisodio);
+    }
+
     @Transactional
     public Episodio save(Episodio episodio) {
         return episodioRepository.save(episodio);
@@ -35,4 +39,9 @@ public class EpisodioService {
     public void deleteById(Long id) {
         episodioRepository.deleteById(id);
     }
+    
+    public List<Episodio> findBySerieId(Long idContenido) {
+        return episodioRepository.findBySerieId(idContenido);
+    }
+    
 }

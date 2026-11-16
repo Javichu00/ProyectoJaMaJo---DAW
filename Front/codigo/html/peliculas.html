@@ -3,10 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JAMAJO | Peliculas</title>
+    <title>JAM | Películas</title>
+    <link rel="icon" href="../../multimedia/LogoNegro.png" type="image/png">
     <meta
       name="description"
-      content="Base visual de peliculas para JAMAJO, preparada para conectar catalogo, filtros, cards y detalle."
+      content="Películas de JAM con una experiencia de descubrimiento más cinematográfica."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,11 +21,11 @@
         theme: {
           extend: {
             colors: {
-              paper: '#FAF8F6',
-              mist: '#E2DEDD',
-              slate: '#5A6362',
-              ink: '#000000',
-              'deep-teal': '#023334',
+              paper: '#000000',
+              mist: '#15120f',
+              slate: '#BEB7A4',
+              ink: '#FFFFFC',
+              'deep-teal': '#FF7F11',
             },
             fontFamily: {
               sans: ['Arimo', 'sans-serif'],
@@ -36,22 +37,90 @@
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/peliculas.css" />
   </head>
-  <body class="bg-paper font-sans text-ink">
+  <body class="page-discovery page-peliculas font-sans">
     <div class="site-shell">
       <header id="site-header"></header>
-      <main class="basic-page shell-width" id="page-peliculas">
-        <section class="basic-page__grid">
-          <article class="basic-page__card">
-            <div class="eyebrow">Pagina</div>
-            <h2>Peliculas</h2>
-          </article>
+
+      <main class="discovery-page shell-width" id="page-peliculas">
+        <section class="discovery-stage discovery-stage--movies" id="peliculas-stage">
+          <div class="discovery-stage__backdrop" id="peliculas-stage-backdrop" aria-hidden="true"></div>
+          <div class="discovery-stage__veil" aria-hidden="true"></div>
+
+          <div class="discovery-stage__content">
+            <div class="discovery-stage__intro">
+              <div class="discovery-stage__eyebrow" id="peliculas-stage-kicker">Películas</div>
+              <div class="discovery-stage__brand" id="peliculas-stage-brand"></div>
+              <h1 class="discovery-stage__title" id="peliculas-stage-title">
+                Cine para descubrir, comparar y encontrar rápido.
+              </h1>
+              <p class="discovery-stage__text" id="peliculas-stage-text">
+                Explora el catálogo con una experiencia más cercana a una plataforma de streaming, pero con personalidad propia.
+              </p>
+              <div class="discovery-stage__meta" id="peliculas-stage-meta"></div>
+              <div class="discovery-stage__actions">
+                <a class="discovery-btn discovery-btn--primary" id="peliculas-stage-open" href="#peliculas-grid">
+                  Abrir destacada
+                </a>
+                <a class="discovery-btn discovery-btn--ghost" href="#peliculas-grid">
+                  Ir al catálogo
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="discovery-stage__selector" id="peliculas-stage-selector" aria-label="Selector del hero"></div>
+        </section>
+
+        <div class="discovery-command">
+          <div class="discovery-command__top">
+            <label class="discovery-search" for="peliculas-search">
+              <span class="discovery-search__label">Buscar</span>
+              <input id="peliculas-search" type="text" placeholder="Título, director o año" autocomplete="off" />
+            </label>
+
+            <label class="discovery-select-wrap" for="peliculas-sort">
+              <span class="discovery-search__label">Ordenar</span>
+              <select id="peliculas-sort" class="discovery-select">
+                <option value="popular">Más populares</option>
+                <option value="rating">Mejor valoradas</option>
+                <option value="newest">Más recientes</option>
+                <option value="oldest">Más antiguas</option>
+                <option value="az">A-Z</option>
+              </select>
+            </label>
+
+            <button id="peliculas-reset" class="discovery-reset" type="button">Limpiar</button>
+          </div>
+
+          <p class="discovery-command__summary" id="peliculas-summary">Preparando recomendaciones...</p>
+        </div>
+
+        <section class="discovery-shelves" id="peliculas-shelves"></section>
+
+        <section class="discovery-results">
+          <div class="discovery-results__head">
+            <div>
+              <div class="discovery-shelf__eyebrow">Resultados</div>
+              <h2 class="discovery-shelf__title">Todo el catálogo de películas</h2>
+            </div>
+            <div class="discovery-results__meta" id="peliculas-results-meta">-</div>
+          </div>
+
+          <div class="peliculas-grid" id="peliculas-grid" aria-live="polite" aria-label="Catálogo de películas"></div>
+
+          <div id="peliculas-loadmore" class="peliculas-loadmore" hidden>
+            <button id="btn-loadmore" class="peliculas-loadmore__btn" type="button">Cargar más películas</button>
+          </div>
         </section>
       </main>
+
       <footer id="site-footer"></footer>
     </div>
 
+    <script src="../js/api_IP.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="../js/script.js" defer></script>
+    <script src="../js/catalog-discovery.js" defer></script>
     <script src="../js/peliculas.js" defer></script>
   </body>
 </html>

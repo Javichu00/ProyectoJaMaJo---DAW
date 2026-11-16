@@ -3,11 +3,12 @@ package com.jamajo.backend.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "lista_contenido")
+@Table(name = "ListaTieneContenido")
 public class ListaTieneContenido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_ltc")
     private Long id;
 
     @ManyToOne

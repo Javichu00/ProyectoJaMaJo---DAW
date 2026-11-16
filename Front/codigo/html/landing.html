@@ -1,0 +1,216 @@
+<!doctype html> <!--Discord? -->
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JAM | Peliculas y series sin limites</title>
+    <meta
+      name="description"
+      content="JAM, tu plataforma de cine y series. Compra, descubre y guarda tus titulos favoritos."
+    />
+    <link rel="icon" href="../../multimedia/LogoNegro.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              paper: '#000814',
+              mist: '#003566',
+              slate: '#BEB7A4',
+              ink: '#FFFFFC',
+              'deep-teal': '#FFC300',
+            },
+            fontFamily: { sans: ['Arimo', 'sans-serif'] },
+          },
+        },
+      }
+    </script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/landing.css" />
+  </head>
+  <body class="font-sans">
+    <div class="landing-streams" aria-hidden="true">
+      <div class="landing-streams__row landing-streams__row--1">
+        <div class="landing-streams__track" data-landing-track="1"></div>
+      </div>
+      <div class="landing-streams__row landing-streams__row--2">
+        <div class="landing-streams__track" data-landing-track="2"></div>
+      </div>
+      <div class="landing-streams__row landing-streams__row--3">
+        <div class="landing-streams__track" data-landing-track="3"></div>
+      </div>
+      <div class="landing-streams__row landing-streams__row--4">
+        <div class="landing-streams__track" data-landing-track="4"></div>
+      </div>
+    </div>
+
+    <div class="landing-overlay" aria-hidden="true"></div>
+
+    <main class="landing-hero">
+      <div class="landing-hero__inner">
+        <div class="landing-hero__logo">
+          <img src="../../multimedia/LogoJAM.png" alt="JAM" />
+        </div>
+
+        <h1 class="landing-hero__title">Peliculas y series sin limites y mucho mas</h1>
+        <p class="landing-hero__sub">
+          Compra titulos, guardalos en tu biblioteca y descubre lo siguiente.
+        </p>
+
+        <div class="landing-form" id="landing-form">
+          <p class="landing-form__label" id="form-label">
+            Introduce tu correo para continuar.
+          </p>
+
+          <!-- Paso 1: email -->
+          <div class="landing-form__row" id="step-email">
+            <input
+              class="landing-form__input"
+              id="input-email"
+              type="email"
+              placeholder="Direccion de correo"
+              autocomplete="email"
+            />
+          </div>
+
+          <!-- Paso 2a: login -->
+          <div class="landing-form__row landing-form__row--hidden" id="step-password">
+            <input
+              class="landing-form__input"
+              id="input-password"
+              type="password"
+              placeholder="Contrasena"
+              autocomplete="current-password"
+            />
+          </div>
+
+          <!-- Paso 2b: registro -->
+          <div class="landing-form__register landing-form__row--hidden" id="step-register">
+            <div class="landing-form__row">
+              <input
+                class="landing-form__input"
+                id="input-register-password"
+                type="password"
+                placeholder="Contrasena"
+                autocomplete="new-password"
+              />
+            </div>
+            <div class="landing-form__row">
+              <input
+                class="landing-form__input"
+                id="input-register-password2"
+                type="password"
+                placeholder="Confirmar contrasena"
+                autocomplete="new-password"
+              />
+            </div>
+          </div>
+
+          <!-- Paso verificación de registro (va justo después de step-register) -->
+    <div class="landing-form__row landing-form__row--hidden" id="step-verify-register">
+      <input
+        class="landing-form__input"
+        id="input-verify-token"
+        type="text"
+        inputmode="numeric"
+        maxlength="6"
+        placeholder="Código de 6 dígitos"
+        autocomplete="one-time-code"
+      />
+    </div>
+
+          <!-- Paso 3a: recuperación — confirmación de envío -->
+          <div class="landing-form__row landing-form__row--hidden" id="step-recovery">
+            <p class="landing-form__hint">
+              Enviaremos un codigo de 6 digitos a <strong id="recovery-email-hint"></strong>.
+            </p>
+          </div>
+
+          <!-- Paso 3b: recuperación — introducir código -->
+          <div class="landing-form__row landing-form__row--hidden" id="step-token">
+            <input
+              class="landing-form__input landing-form__input--code"
+              id="input-token"
+              type="text"
+              inputmode="numeric"
+              maxlength="6"
+              placeholder="Codigo de 6 digitos"
+              autocomplete="one-time-code"
+            />
+          </div>
+
+          <!-- Paso 3c: nueva contraseña -->
+          <div class="landing-form__register landing-form__row--hidden" id="step-new-password">
+            <div class="landing-form__row">
+              <input
+                class="landing-form__input"
+                id="input-new-password"
+                type="password"
+                placeholder="Nueva contrasena"
+                autocomplete="new-password"
+              />
+            </div>
+            <div class="landing-form__row">
+              <input
+                class="landing-form__input"
+                id="input-new-password2"
+                type="password"
+                placeholder="Confirmar nueva contrasena"
+                autocomplete="new-password"
+              />
+            </div>
+          </div>
+
+          <div class="landing-form__actions">
+            <button class="landing-form__btn landing-form__btn--full" id="btn-comenzar" type="button">
+              Comenzar <span class="landing-form__arrow">&rsaquo;</span>
+            </button>
+            <button class="landing-form__btn landing-form__btn--full landing-form__btn--hidden" id="btn-entrar" type="button">
+              Entrar <span class="landing-form__arrow">&rsaquo;</span>
+            </button>
+            <button class="landing-form__btn landing-form__btn--full landing-form__btn--hidden" id="btn-registrar" type="button">
+              Crear cuenta <span class="landing-form__arrow">&rsaquo;</span>
+            </button>
+            <button class="landing-form__btn landing-form__btn--full landing-form__btn--hidden" id="btn-verificar-registro" type="button">
+              Verificar correo <span class="landing-form__arrow">&rsaquo;</span>
+            </button>
+            <button class="landing-form__btn landing-form__btn--full landing-form__btn--hidden" id="btn-enviar-codigo" type="button">
+              Enviar codigo <span class="landing-form__arrow">&rsaquo;</span>
+            </button>
+            <button class="landing-form__btn landing-form__btn--full landing-form__btn--hidden" id="btn-validar-token" type="button">
+              Verificar codigo <span class="landing-form__arrow">&rsaquo;</span>
+            </button>
+            <button class="landing-form__btn landing-form__btn--full landing-form__btn--hidden" id="btn-guardar-password" type="button">
+              Guardar contrasena <span class="landing-form__arrow">&rsaquo;</span>
+            </button>
+          </div>
+
+          <p class="landing-form__error" id="form-error"></p>
+          <p class="landing-form__success" id="form-success"></p>
+
+          <!-- Acciones secundarias -->
+          <button class="landing-form__recovery-link landing-form__btn--hidden" id="btn-recuperar" type="button">
+            ¿Olvidaste tu contraseña?
+          </button>
+          <button class="landing-form__guest landing-form__btn--hidden" id="btn-cancelar-recuperacion" type="button">
+            Volver al inicio de sesion
+          </button>
+          <button class="landing-form__guest" id="btn-guest" type="button">
+            Continuar sin cuenta
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="../js/api_IP.js"></script>
+    <script src="../js/landing.js" defer></script>
+  </body>
+</html>

@@ -3,28 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JAMAJO | Explorar</title>
-    <meta
-      name="description"
-      content="Zona de exploracion de JAMAJO, preparada para categorias, reparto, colecciones y descubrimiento."
-    />
+    <title>JAM | Explorar</title>
+    <link rel="icon" href="../../multimedia/LogoNegro.png" type="image/png" />
+    <meta name="description" content="Explora peliculas, series, categorias, actores y directores dentro del catalogo de JAM." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              paper: '#FAF8F6',
-              mist: '#E2DEDD',
-              slate: '#5A6362',
-              ink: '#000000',
-              'deep-teal': '#023334',
+              paper: '#000000',
+              mist: '#15120f',
+              slate: '#BEB7A4',
+              ink: '#FFFFFC',
+              'deep-teal': '#FF7F11',
             },
             fontFamily: {
               sans: ['Arimo', 'sans-serif'],
@@ -36,22 +31,110 @@
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/explorar.css" />
   </head>
-  <body class="bg-paper font-sans text-ink">
+  <body class="page-discovery page-explorar font-sans">
     <div class="site-shell">
       <header id="site-header"></header>
-      <main class="basic-page shell-width" id="page-explorar">
-        <section class="basic-page__grid">
-          <article class="basic-page__card">
-            <div class="eyebrow">Pagina</div>
-            <h2>Explorar</h2>
-          </article>
+
+      <main class="explore-page shell-width" id="page-explorar">
+        <section class="explore-hero" aria-labelledby="explore-title">
+          <div class="explore-hero__ambient" aria-hidden="true"></div>
+          <div class="explore-hero__orbit explore-hero__orbit--one" aria-hidden="true"></div>
+          <div class="explore-hero__orbit explore-hero__orbit--two" aria-hidden="true"></div>
+
+          <div class="explore-hero__content">
+            <p class="explore-kicker">Explorar JAM</p>
+            <h1 class="explore-hero__title" id="explore-title">Avengers: Endgame</h1>
+            <p class="explore-hero__text">Encuentra películas, series, actores y directores desde una vista limpia, rápida y pensada para descubrir sin perder tiempo.</p>
+            <p class="explore-hero__quote">“Parte del viaje es el final.”</p>
+
+            <div class="explore-hero__actions">
+              <a class="explore-btn explore-btn--primary" id="explore-feature-link" href="./explorar.html?q=Endgame">Ver Endgame</a>
+              <a class="explore-btn explore-btn--ghost" href="#explore-controls">Explorar catálogo</a>
+            </div>
+
+            <div class="explore-stats" aria-label="Metricas del catalogo">
+              <article class="explore-stat">
+                <span class="explore-stat__value" id="explore-total">-</span>
+                <span class="explore-stat__label">Titulos</span>
+              </article>
+              <article class="explore-stat">
+                <span class="explore-stat__value" id="explore-movies">-</span>
+                <span class="explore-stat__label">Peliculas</span>
+              </article>
+              <article class="explore-stat">
+                <span class="explore-stat__value" id="explore-series">-</span>
+                <span class="explore-stat__label">Series</span>
+              </article>
+            </div>
+          </div>
+
+          <div class="explore-hero__visual" aria-hidden="true">
+            <span class="explore-hero__hud explore-hero__hud--rating">★ Top JAM</span>
+            <span class="explore-hero__hud explore-hero__hud--signal">Endgame</span>
+            <span class="explore-hero__scan"></span>
+            <img class="explore-hero__ironman" src="../../multimedia/hero/ironman.png" alt="" />
+          </div>
+
+          <div class="explore-hero__wave" aria-hidden="true"></div>
         </section>
+
+        <section class="discovery-command explore-controls" id="explore-controls" aria-label="Filtros de exploracion">
+          <div class="discovery-command__top explore-controls__top">
+            <label class="discovery-search" for="explore-search">
+              <span class="discovery-search__label">Buscar</span>
+              <input id="explore-search" type="search" placeholder="Director, actor, pelicula o serie" autocomplete="off" />
+            </label>
+
+            <label class="discovery-select-wrap" for="explore-sort">
+              <span class="discovery-search__label">Ordenar</span>
+              <select id="explore-sort" class="discovery-select">
+                <option value="popular">Mas populares</option>
+                <option value="rating">Mejor valoradas</option>
+                <option value="newest">Mas recientes</option>
+                <option value="oldest">Mas antiguas</option>
+                <option value="az">A-Z</option>
+              </select>
+            </label>
+
+            <label class="discovery-select-wrap" for="explore-category">
+              <span class="discovery-search__label">Categorias</span>
+              <select id="explore-category" class="discovery-select">
+                <option value="">Todas</option>
+              </select>
+            </label>
+
+            <button id="explore-reset" class="discovery-reset" type="button">Limpiar</button>
+          </div>
+          <p class="discovery-command__summary" id="explore-summary" aria-live="polite">Preparando exploracion...</p>
+        </section>
+
+        <section class="explore-results" aria-labelledby="explore-results-title">
+          <div class="explore-section-head">
+            <div>
+              <p class="explore-kicker" id="explore-results-kicker">Catalogo</p>
+              <h2 class="explore-section-title" id="explore-results-title">Resultados</h2>
+            </div>
+            <span class="explore-count" id="explore-results-count">-</span>
+          </div>
+
+          <div class="explore-grid" id="explore-results-grid" aria-live="polite"></div>
+
+          <div class="explore-loadmore" id="explore-loadmore" hidden>
+            <button id="explore-loadmore-btn" class="explore-loadmore__btn" type="button">Cargar mas</button>
+          </div>
+        </section>
+
+        <section class="explore-shelves" id="explore-shelves" aria-label="Selecciones destacadas"></section>
+
+        
       </main>
+
       <footer id="site-footer"></footer>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="../js/api_IP.js"></script>
     <script src="../js/script.js" defer></script>
+    <script src="../js/catalog-discovery.js" defer></script>
     <script src="../js/explorar.js" defer></script>
   </body>
 </html>

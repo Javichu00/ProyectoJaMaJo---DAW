@@ -1,1 +1,108 @@
-/* CSS especifico de peliculas pendiente. */
+#page-peliculas {
+  --discovery-accent: #FF7F11;
+  --discovery-accent-strong: #FFFFFC;
+  --peliculas-fixed-card-width: var(--catalog-card-width, 176px);
+}
+
+#page-peliculas input,
+#page-peliculas select,
+#page-peliculas button {
+  accent-color: var(--discovery-accent);
+}
+
+#peliculas-search {
+  caret-color: var(--discovery-accent);
+}
+
+#peliculas-search::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
+#peliculas-search::-ms-clear,
+#peliculas-search::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+#page-peliculas .discovery-search input,
+#page-peliculas .discovery-select,
+#page-peliculas .discovery-reset,
+#page-peliculas .discovery-selectbox__trigger {
+  color-scheme: dark;
+}
+
+.discovery-stage--movies .discovery-stage__veil {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.86), rgba(0, 0, 0, 0.48)),
+    radial-gradient(circle at 78% 24%, rgba(255, 27, 28, 0.18), transparent 26rem);
+}
+
+.discovery-stage--movies .discovery-stage__backdrop {
+  background-position: center 18%;
+}
+
+#peliculas-grid,
+.peliculas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--peliculas-fixed-card-width), var(--peliculas-fixed-card-width)));
+  justify-content: start;
+  align-items: stretch;
+  gap: var(--catalog-card-gap);
+}
+
+#peliculas-grid .pelicula-card,
+#peliculas-grid .skeleton-card,
+.peliculas-grid .pelicula-card,
+.peliculas-grid .skeleton-card {
+  width: var(--peliculas-fixed-card-width);
+  min-width: var(--peliculas-fixed-card-width);
+  max-width: var(--peliculas-fixed-card-width);
+}
+
+.peliculas-loadmore {
+  display: flex;
+  justify-content: center;
+  margin-top: 26px;
+}
+
+.peliculas-loadmore__btn {
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(190, 183, 164, 0.24);
+  background: rgba(255, 127, 17, 0.14);
+  color: #FFFFFC;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.peliculas-loadmore__btn:hover {
+  background: rgba(255, 127, 17, 0.2);
+  transform: none;
+}
+
+@media (max-width: 640px) {
+  #peliculas-grid,
+  .peliculas-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  #peliculas-grid .pelicula-card,
+  #peliculas-grid .skeleton-card,
+  .peliculas-grid .pelicula-card,
+  .peliculas-grid .skeleton-card {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+  }
+}
+
+

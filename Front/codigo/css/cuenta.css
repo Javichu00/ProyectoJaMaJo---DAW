@@ -1,0 +1,277 @@
+.perfil-profile-avatar img,
+.cuenta-overview__avatar img,
+.perfil-avatar-chip__preview {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.cuenta-dashboard {
+  padding: 28px 0 72px;
+  display: grid;
+  gap: 20px;
+}
+
+.cuenta-overview {
+  display: grid;
+  gap: 24px;
+  padding: 34px 32px;
+  border-radius: 2rem;
+  border: 1px solid rgba(190, 183, 164, 0.12);
+  background:
+    radial-gradient(circle at top left, rgba(190, 183, 164, 0.16), transparent 28%),
+    linear-gradient(160deg, rgba(36, 27, 19, 0.82) 0%, rgba(0, 0, 0, 0.98) 100%);
+  backdrop-filter: blur(18px);
+}
+
+@media (min-width: 980px) {
+  .cuenta-overview {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
+}
+
+.cuenta-overview__content {
+  display: grid;
+  gap: 10px;
+}
+
+.cuenta-overview__eyebrow,
+.cuenta-panel__eyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(190, 183, 164, 0.62);
+}
+
+.cuenta-overview__title {
+  margin: 0;
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  line-height: 0.94;
+  letter-spacing: -0.06em;
+}
+
+.cuenta-overview__subtitle {
+  margin: 0;
+  font-size: 1rem;
+  color: rgba(190, 183, 164, 0.68);
+}
+
+.cuenta-overview__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.cuenta-overview__side {
+  display: grid;
+  gap: 16px;
+  justify-items: start;
+}
+
+@media (min-width: 980px) {
+  .cuenta-overview__side {
+    justify-items: end;
+  }
+}
+
+.cuenta-overview__avatar {
+  width: 82px;
+  height: 82px;
+  font-size: 2rem;
+}
+
+.cuenta-overview__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+@media (min-width: 980px) {
+  .cuenta-overview__actions {
+    justify-content: flex-end;
+  }
+}
+
+.cuenta-grid {
+  display: grid;
+  gap: 18px;
+  align-items: start;
+}
+
+@media (min-width: 1080px) {
+  .cuenta-grid {
+    grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.82fr);
+  }
+}
+
+.cuenta-main,
+.cuenta-side {
+  display: grid;
+  gap: 18px;
+}
+
+.cuenta-panel {
+  border-radius: 1.8rem;
+  border: 1px solid rgba(190, 183, 164, 0.1);
+  background: linear-gradient(180deg, rgba(36, 27, 19, 0.58) 0%, rgba(0, 0, 0, 0.98) 100%);
+  overflow: hidden;
+}
+
+.cuenta-panel--danger {
+  border-color: rgba(220, 90, 90, 0.18);
+  background: linear-gradient(180deg, rgba(80, 20, 20, 0.42) 0%, rgba(0, 0, 0, 0.98) 100%);
+}
+
+.cuenta-panel__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 22px 24px 18px;
+  border-bottom: 1px solid rgba(190, 183, 164, 0.08);
+}
+
+.cuenta-panel__title {
+  margin: 6px 0 0;
+  font-size: 1.25rem;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+}
+
+.cuenta-panel__body {
+  padding: 22px 24px 24px;
+}
+
+.cuenta-panel__copy {
+  margin: 0 0 16px;
+  color: rgba(190, 183, 164, 0.72);
+  line-height: 1.65;
+}
+
+.cuenta-panel__copy--muted {
+  margin-bottom: 18px;
+}
+
+.cuenta-stats {
+  display: grid;
+  gap: 14px;
+  padding: 22px 24px 24px;
+}
+
+@media (min-width: 680px) {
+  .cuenta-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.cuenta-stat {
+  min-height: 126px;
+  padding: 18px 18px 16px;
+  border-radius: 1.3rem;
+  border: 1px solid rgba(190, 183, 164, 0.1);
+  background: rgba(0, 0, 0, 0.28);
+  display: grid;
+  align-content: space-between;
+  gap: 12px;
+}
+
+.cuenta-stat__label {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(190, 183, 164, 0.54);
+}
+
+.cuenta-stat__value {
+  font-size: clamp(1.2rem, 2vw, 1.85rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  word-break: break-word;
+}
+
+.cuenta-profiles {
+  display: grid;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.cuenta-profiles .perfil-profile-card {
+  border-radius: 1.3rem;
+}
+
+.cuenta-history .perfil-info-row__key {
+  letter-spacing: 0.08em;
+}
+
+.cuenta-list {
+  display: grid;
+  gap: 14px;
+}
+
+.cuenta-list__row {
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px;
+  border-radius: 1.2rem;
+  border: 1px solid rgba(190, 183, 164, 0.08);
+  background: rgba(0, 0, 0, 0.24);
+}
+
+.cuenta-list__key {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(190, 183, 164, 0.5);
+}
+
+.cuenta-list__val {
+  font-size: 0.95rem;
+  color: #ffffff;
+  word-break: break-word;
+}
+
+.cuenta-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.cuenta-actions .perfil-btn-ghost,
+.cuenta-panel--danger .perfil-btn-ghost {
+  justify-content: center;
+}
+
+@media (max-width: 720px) {
+  .cuenta-dashboard {
+    padding-top: 22px;
+  }
+
+  .cuenta-overview,
+  .cuenta-panel__head,
+  .cuenta-panel__body,
+  .cuenta-stats {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .cuenta-overview {
+    padding-top: 26px;
+    padding-bottom: 26px;
+  }
+
+  .cuenta-panel__head {
+    padding-top: 18px;
+    padding-bottom: 16px;
+  }
+
+  .cuenta-panel__body,
+  .cuenta-stats {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+}

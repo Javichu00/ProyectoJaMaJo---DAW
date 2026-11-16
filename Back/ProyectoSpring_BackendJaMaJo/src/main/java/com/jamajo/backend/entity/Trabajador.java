@@ -16,39 +16,23 @@ public class Trabajador {
     @Column(nullable = false)
     private String nombre;
 
-    @Column(columnDefinition = "TEXT")
-    private String biografia;
+    @Column(name = "rutaFoto", columnDefinition = "TEXT")
+    private String rutaFoto;
 
-    public Trabajador() {
-    }
+    public Trabajador() {}
 
-    public Trabajador(Long id, String nombre, String biografia) {
+    public Trabajador(Long id, String nombre, String rutaFoto) {
         this.id = id;
         this.nombre = nombre;
-        this.biografia = biografia;
+        this.rutaFoto = rutaFoto;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getBiografia() {
-        return biografia;
-    }
-
-    public void setBiografia(String biografia) {
-        this.biografia = biografia;
-    }
+    public String getRutaFoto() { return rutaFoto; }
+    public void setRutaFoto(String rutaFoto) { this.rutaFoto = rutaFoto; }
 }

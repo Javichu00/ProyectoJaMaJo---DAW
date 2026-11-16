@@ -1,0 +1,319 @@
+﻿<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JAM | Trabajador</title>
+    <link rel="icon" href="../../multimedia/LogoNegro.png" type="image/png">
+    <meta name="description" content="BiografÃ­a y filmografÃ­a de actores y directores en JAM." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              paper: '#000000',
+              mist:  '#15120f',
+              slate: '#BEB7A4',
+              ink:   '#FFFFFC',
+              'deep-teal': '#FF7F11',
+            },
+            fontFamily: { sans: ['Arimo', 'sans-serif'] },
+          },
+        },
+      }
+    </script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+:root {
+        --tw-surface: rgba(32, 33, 38, 0.88);
+        --tw-border:  rgba(190, 183, 164, 0.14);
+        --tw-accent:  #FF7F11;
+      }
+.trabajador-page {
+        padding: 22px 0 64px;
+        display: grid;
+        gap: 20px;
+      }
+.tw-hero {
+        position: relative;
+        overflow: hidden;
+        border: var(--border-soft);
+        border-radius: 2rem;
+        background: var(--tw-surface);
+        backdrop-filter: blur(20px);
+        min-height: 340px;
+      }
+
+      .tw-hero__backdrop {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center top;
+        filter: brightness(0.22) saturate(0.7) blur(2px);
+        transform: scale(1.06);
+        transition: background-image 0.5s ease;
+      }
+
+      .tw-hero__veil {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          160deg,
+          rgba(13,13,13,0.65) 0%,
+          rgba(13,13,13,0.3) 50%,
+          rgba(13,13,13,0.8) 100%
+        );
+      }
+
+      .tw-hero__content {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: 24px;
+        padding: 32px;
+        align-items: end;
+      }
+
+      @media (min-width: 720px) {
+        .tw-hero__content {
+          grid-template-columns: auto 1fr;
+          align-items: center;
+          padding: 40px 40px 36px;
+        }
+      }
+.tw-breadcrumb {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 24px 32px 0;
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(204,211,217,0.6);
+      }
+
+      .tw-breadcrumb a {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: rgba(204,211,217,0.6);
+        transition: color 0.2s;
+      }
+
+      .tw-breadcrumb a:hover { color: var(--tw-accent); }
+      .tw-breadcrumb__sep { opacity: 0.4; }
+.tw-photo-wrap {
+        width: clamp(120px, 18vw, 180px);
+        aspect-ratio: 2/3;
+        border-radius: 1.35rem;
+        overflow: hidden;
+        border: 1px solid rgba(204,211,217,0.18);
+        background: rgba(52,56,64,0.6);
+        box-shadow: 0 24px 48px rgba(0,0,0,0.5);
+        flex-shrink: 0;
+      }
+
+      .tw-photo-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .tw-photo-initials {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        place-items: center;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 700;
+        color: rgba(204,211,217,0.6);
+        background: linear-gradient(135deg, rgba(52,56,64,0.9), rgba(13,13,13,0.95));
+      }
+.tw-hero__copy {
+        display: grid;
+        gap: 12px;
+      }
+
+      .tw-hero__eyebrow {
+        font-size: 0.68rem;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: rgba(204,211,217,0.65);
+      }
+
+      .tw-hero__name {
+        margin: 0;
+        font-size: clamp(2.4rem, 6vw, 5rem);
+        line-height: 0.9;
+        letter-spacing: -0.06em;
+        color: #ffffff;
+      }
+
+      .tw-hero__meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 4px;
+      }
+
+      .tw-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        min-height: 30px;
+        padding: 0 12px;
+        border-radius: 999px;
+        font-size: 0.68rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        border: 1px solid rgba(204,211,217,0.18);
+        background: rgba(52,56,64,0.52);
+        color: rgba(204,211,217,0.9);
+      }
+.tw-card {
+        border: var(--border-soft);
+        border-radius: 2rem;
+        background: var(--tw-surface);
+        backdrop-filter: blur(18px);
+        padding: 28px 32px;
+      }
+
+      .tw-card__label {
+        font-size: 0.68rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: rgba(204,211,217,0.5);
+        margin-bottom: 8px;
+      }
+
+      .tw-card__title {
+        margin: 0 0 16px;
+        font-size: clamp(1.5rem, 3vw, 2.2rem);
+        line-height: 0.96;
+        letter-spacing: -0.04em;
+        color: var(--tw-accent);
+      }
+
+      .tw-bio {
+        margin: 0;
+        color: rgba(255,255,255,0.76);
+        line-height: 1.82;
+        font-size: 0.96rem;
+        max-width: 72ch;
+      }
+.tw-filmografia {
+        border: var(--border-soft);
+        border-radius: 2rem;
+        background: var(--tw-surface);
+        backdrop-filter: blur(18px);
+        padding: 28px 32px;
+      }
+
+      .tw-filmografia__head {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 22px;
+        flex-wrap: wrap;
+      }
+
+      .tw-filmografia__filters {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .tw-filter-btn {
+        min-height: 36px;
+        padding: 0 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(204,211,217,0.16);
+        background: rgba(52,56,64,0.52);
+        color: rgba(204,211,217,0.6);
+        font-size: 0.7rem;
+        font-family: inherit;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s, border-color 0.2s;
+      }
+
+      .tw-filter-btn:hover {
+        color: var(--tw-accent);
+        border-color: rgba(204,211,217,0.32);
+      }
+
+      .tw-filter-btn.is-active {
+        background: var(--tw-accent);
+        color: #000000;
+        border-color: transparent;
+      }
+.tw-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(var(--catalog-card-width), var(--catalog-card-width)));
+        justify-content: start;
+        gap: var(--catalog-card-gap);
+      }
+.tw-empty {
+        grid-column: 1/-1;
+        padding: 48px 24px;
+        text-align: center;
+        color: rgba(204,211,217,0.35);
+        font-size: 0.9rem;
+        line-height: 1.7;
+      }
+
+      .tw-empty strong {
+        display: block;
+        font-size: 1.4rem;
+        letter-spacing: -0.04em;
+        margin-bottom: 8px;
+        color: rgba(204,211,217,0.5);
+      }
+      @keyframes tw-shimmer {
+        100% { transform: translateX(100%); }
+      }
+@keyframes tw-fadeUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      .tw-anim { animation: tw-fadeUp 0.5s ease both; }
+      .tw-anim-delay-1 { animation-delay: 0.08s; }
+      .tw-anim-delay-2 { animation-delay: 0.16s; }
+      .tw-anim-delay-3 { animation-delay: 0.24s; }
+
+      @media (max-width: 640px) {
+        .tw-card,
+        .tw-filmografia { padding: 20px 18px; border-radius: 1.5rem; }
+        .tw-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+        .tw-hero .tw-hero__content { padding: 22px 18px 26px; }
+        .tw-breadcrumb { padding: 18px 18px 0; }
+      }
+    </style>
+  </head>
+  <body class="font-sans">
+    <div class="site-shell">
+      <header id="site-header"></header>
+
+      <main class="shell-width">
+        <div id="trabajador-root" class="trabajador-page" aria-live="polite"></div>
+      </main>
+
+      <footer id="site-footer"></footer>
+    </div>
+
+    <script src="../js/api_IP.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="../js/script.js" defer></script>
+    <script src="../js/trabajador.js" defer></script>
+  </body>
+</html>

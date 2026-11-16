@@ -3,11 +3,12 @@ package com.jamajo.backend.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "actor_participa")
+@Table(name = "actorparticipa")
 public class ActorParticipa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_relacion")
     private Long id;
 
     @ManyToOne

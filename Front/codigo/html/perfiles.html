@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JAM | Elegir perfil</title>
+    <link rel="icon" href="../../multimedia/LogoNegro.png" type="image/png" />
+    <meta name="description" content="Elige el perfil con el que quieres entrar en JAM." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/perfiles.css" />
+  </head>
+  <body class="bg-paper font-sans text-ink">
+    <main class="profiles-page">
+      <div class="profiles-page__brand">
+        <img src="../../multimedia/LogoJAM.png" alt="JAM" />
+      </div>
+
+      <section class="profiles-shell" aria-label="Seleccion de perfiles">
+        <p class="profiles-shell__eyebrow" id="profiles-account-email">Cuenta principal</p>
+        <h1 class="profiles-shell__title" id="profiles-title">Quien esta viendo JAM?</h1>
+        <p class="profiles-shell__subtitle" id="profiles-subtitle">
+          Elige un perfil para entrar o crea uno nuevo si tu plan lo permite.
+        </p>
+        <p class="profiles-shell__status" id="profiles-status"></p>
+        <p class="profiles-shell__feedback profiles-shell__feedback--error" id="profiles-error" hidden></p>
+
+        <div class="profiles-grid" id="profiles-grid"></div>
+
+        <div class="profiles-actions">
+          <a class="profiles-btn profiles-btn--ghost" href="./cuenta.html">Mi cuenta</a>
+          <button class="profiles-btn profiles-btn--ghost" id="profiles-logout" type="button">
+            Cerrar sesion
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <div class="profiles-modal" id="profiles-modal" role="dialog" aria-modal="true" aria-label="Configurar perfil">
+      <div class="profiles-modal__backdrop"></div>
+      <div class="profiles-modal__box">
+        <div class="profiles-modal__header">
+          <p class="profiles-modal__eyebrow" id="profiles-modal-eyebrow">Perfil</p>
+          <h2 class="profiles-modal__title" id="profiles-modal-title">Configura tu perfil</h2>
+          <p class="profiles-modal__desc" id="profiles-modal-desc">
+            Elige un nombre visible y un avatar para entrar en JAM.
+          </p>
+        </div>
+
+        <div class="profiles-modal__field">
+          <label class="profiles-modal__label" for="profiles-modal-name">Nombre del perfil</label>
+          <input class="profiles-modal__input" id="profiles-modal-name" type="text" maxlength="40" />
+        </div>
+
+        <div class="profiles-modal__field">
+          <span class="profiles-modal__label">Avatar</span>
+          <div class="profiles-avatar-picker" id="profiles-avatar-picker"></div>
+        </div>
+
+        <p class="profiles-shell__feedback profiles-shell__feedback--error" id="profiles-modal-error" hidden></p>
+
+        <div class="profiles-modal__actions">
+          <button class="profiles-btn profiles-btn--ghost" id="profiles-modal-cancel" type="button">
+            Cancelar
+          </button>
+          <button class="profiles-btn" id="profiles-modal-confirm" type="button">Guardar</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/api_IP.js"></script>
+    <script src="../js/perfiles.js" defer></script>
+  </body>
+</html>

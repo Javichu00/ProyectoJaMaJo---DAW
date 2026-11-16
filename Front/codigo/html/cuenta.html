@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JAM | Mi cuenta</title>
+    <link rel="icon" href="../../multimedia/LogoNegro.png" type="image/png" />
+    <meta
+      name="description"
+      content="Dashboard de cliente para gestionar plan, perfiles, compras y seguridad en JAM."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              paper: '#000000',
+              mist: '#15120f',
+              slate: '#BEB7A4',
+              ink: '#FFFFFC',
+              'deep-teal': '#FF7F11',
+            },
+            fontFamily: { sans: ['Arimo', 'sans-serif'] },
+          },
+        },
+      }
+    </script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/perfil.css" />
+    <link rel="stylesheet" href="../css/cuenta.css" />
+  </head>
+  <body class="bg-paper font-sans text-ink">
+    <div class="site-shell">
+      <header id="site-header"></header>
+
+      <main class="cuenta-dashboard shell-width">
+        <section class="cuenta-overview anim-up" style="animation-delay: 0.04s">
+          <div class="cuenta-overview__content">
+            <p class="cuenta-overview__eyebrow">Dashboard de cliente</p>
+            <h1 class="cuenta-overview__title" id="perfil-username">Cuenta JAM</h1>
+            <p class="cuenta-overview__subtitle" id="perfil-account-email">cuenta@jam.com</p>
+            <div class="cuenta-overview__pills">
+              <span class="perfil-hero__pill perfil-hero__pill--active" id="perfil-pill-status">Activa</span>
+              <span class="perfil-hero__pill" id="perfil-pill-plan">Plan</span>
+              <span class="perfil-hero__pill" id="perfil-pill-profiles">0 / 0 perfiles</span>
+            </div>
+          </div>
+
+          <div class="cuenta-overview__side">
+            <div class="perfil-hero__avatar cuenta-overview__avatar" id="perfil-avatar">JA</div>
+            <div class="cuenta-overview__actions">
+              <a class="perfil-btn-ghost" href="./perfiles.html">Cambiar perfil</a>
+              <a class="perfil-btn-ghost" href="./planes.html">Ver planes</a>
+              <button class="perfil-btn-ghost" id="btn-logout" type="button">Cerrar sesion</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="cuenta-grid">
+          <div class="cuenta-main">
+            <article class="cuenta-panel anim-up" style="animation-delay: 0.08s">
+              <div class="cuenta-panel__head">
+                <div>
+                  <p class="cuenta-panel__eyebrow">Resumen</p>
+                  <h2 class="cuenta-panel__title">Estado de la suscripcion</h2>
+                </div>
+              </div>
+
+              <div class="cuenta-stats">
+                <div class="cuenta-stat">
+                  <span class="cuenta-stat__label">Plan actual</span>
+                  <strong class="cuenta-stat__value" id="info-plan">GRATIS</strong>
+                </div>
+                <div class="cuenta-stat">
+                  <span class="cuenta-stat__label">Perfiles</span>
+                  <strong class="cuenta-stat__value" id="info-perfiles">0 / 0</strong>
+                </div>
+                <div class="cuenta-stat">
+                  <span class="cuenta-stat__label">Fin del plan</span>
+                  <strong class="cuenta-stat__value" id="info-fecha-fin">-</strong>
+                </div>
+                <div class="cuenta-stat">
+                  <span class="cuenta-stat__label">Estado</span>
+                  <strong class="cuenta-stat__value" id="info-status">Activa</strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="cuenta-panel anim-up" style="animation-delay: 0.12s" id="perfiles">
+              <div class="cuenta-panel__head">
+                <div>
+                  <p class="cuenta-panel__eyebrow">Perfiles</p>
+                  <h2 class="cuenta-panel__title">Gestion de perfiles</h2>
+                </div>
+                <button class="perfil-btn-save" id="btn-open-create-profile" type="button">Crear perfil</button>
+              </div>
+
+              <div class="cuenta-panel__body">
+                <p class="cuenta-panel__copy">
+                  El correo y la contrasena pertenecen a la cuenta principal. Los nombres visibles y avatares se gestionan como perfiles.
+                </p>
+                <p class="perfil-inline-note" id="profiles-summary">0 de 0 perfiles en uso.</p>
+                <p class="perfil-inline-note perfil-inline-note--error" id="profiles-feedback" hidden></p>
+                <div class="perfil-profiles cuenta-profiles" id="profiles-list"></div>
+              </div>
+            </article>
+
+            <article class="cuenta-panel anim-up" style="animation-delay: 0.16s">
+              <div class="cuenta-panel__head">
+                <div>
+                  <p class="cuenta-panel__eyebrow">Compras</p>
+                  <h2 class="cuenta-panel__title">Historial de pagos</h2>
+                </div>
+              </div>
+
+              <div class="cuenta-panel__body cuenta-history" id="historial-body">
+                <div class="perfil-empty">
+                  <div class="perfil-empty__icon">JAM</div>
+                  <p class="perfil-empty__text">Aun no hay compras registradas en la cuenta.</p>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <aside class="cuenta-side">
+            <article class="cuenta-panel anim-up" style="animation-delay: 0.1s">
+              <div class="cuenta-panel__head">
+                <div>
+                  <p class="cuenta-panel__eyebrow">Cuenta</p>
+                  <h2 class="cuenta-panel__title">Datos principales</h2>
+                </div>
+              </div>
+
+              <div class="cuenta-panel__body">
+                <div class="cuenta-list">
+                  <div class="cuenta-list__row">
+                    <span class="cuenta-list__key">Correo</span>
+                    <span class="cuenta-list__val" id="info-email">-</span>
+                  </div>
+                  <div class="cuenta-list__row">
+                    <span class="cuenta-list__key">Miembro desde</span>
+                    <span class="cuenta-list__val" id="info-fecha">-</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="cuenta-panel anim-up" style="animation-delay: 0.14s">
+              <div class="cuenta-panel__head">
+                <div>
+                  <p class="cuenta-panel__eyebrow">Acciones</p>
+                  <h2 class="cuenta-panel__title">Accesos rapidos</h2>
+                </div>
+              </div>
+
+              <div class="cuenta-panel__body cuenta-actions">
+                <a class="perfil-btn-ghost" href="./perfiles.html">Seleccionar perfil</a>
+                <a class="perfil-btn-ghost" href="./planes.html">Cambiar plan</a>
+                <button class="perfil-btn-ghost" id="btn-change-password" type="button">Cambiar contraseña</button>
+                <button class="perfil-btn-ghost" id="btn-logout-2" type="button">Cerrar sesion</button>
+              </div>
+            </article>
+
+            <article class="cuenta-panel cuenta-panel--danger anim-up" style="animation-delay: 0.18s">
+              <div class="cuenta-panel__head">
+                <div>
+                  <p class="cuenta-panel__eyebrow">Seguridad</p>
+                  <h2 class="cuenta-panel__title">Eliminar cuenta</h2>
+                </div>
+              </div>
+
+              <div class="cuenta-panel__body">
+                <p class="cuenta-panel__copy cuenta-panel__copy--muted">
+                  Esta accion desactiva la cuenta principal y corta el acceso al catalogo y a los perfiles asociados.
+                </p>
+                <button class="perfil-btn-ghost perfil-btn-ghost--danger" id="btn-delete-account" type="button">
+                  Desactivar cuenta
+                </button>
+              </div>
+            </article>
+          </aside>
+        </section>
+      </main>
+
+      <footer id="site-footer"></footer>
+    </div>
+
+    <div class="perfil-modal" id="modal-profile" role="dialog" aria-modal="true" aria-label="Editar perfil">
+      <div class="perfil-modal__backdrop"></div>
+      <div class="perfil-modal__box">
+        <div class="perfil-modal__icon">Perfil</div>
+        <h2 class="perfil-modal__title" id="modal-profile-title">Crear perfil</h2>
+        <p class="perfil-modal__desc" id="modal-profile-desc">
+          Elige el nombre con el que se mostrara este perfil dentro de la cuenta.
+        </p>
+        <div class="perfil-modal__field">
+          <label class="perfil-modal__label" for="modal-profile-name">Nombre del perfil</label>
+          <input class="perfil-modal__input" id="modal-profile-name" type="text" maxlength="40" />
+        </div>
+        <div class="perfil-modal__field">
+          <span class="perfil-modal__label">Avatar</span>
+          <div class="perfil-avatar-picker" id="modal-profile-avatars"></div>
+        </div>
+        <p class="perfil-inline-note perfil-inline-note--error" id="modal-profile-error" hidden></p>
+        <div class="perfil-modal__actions">
+          <button class="perfil-modal__cancel" id="modal-profile-cancel" type="button">Cancelar</button>
+          <button class="perfil-modal__confirm" id="modal-profile-confirm" type="button">Guardar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="perfil-modal" id="modal-profile-delete" role="dialog" aria-modal="true" aria-label="Eliminar perfil">
+      <div class="perfil-modal__backdrop"></div>
+      <div class="perfil-modal__box">
+        <div class="perfil-modal__icon">Alerta</div>
+        <h2 class="perfil-modal__title">Eliminar perfil</h2>
+        <p class="perfil-modal__desc">
+          Para eliminar este perfil, confirma la contrasena de la cuenta principal.
+        </p>
+        <div class="perfil-modal__field">
+          <label class="perfil-modal__label" for="modal-profile-password">Contrasena</label>
+          <input class="perfil-modal__input" id="modal-profile-password" type="password" autocomplete="current-password" />
+        </div>
+        <p class="perfil-inline-note perfil-inline-note--error" id="modal-profile-delete-error" hidden></p>
+        <div class="perfil-modal__actions">
+          <button class="perfil-modal__cancel" id="modal-profile-delete-cancel" type="button">Cancelar</button>
+          <button class="perfil-modal__confirm" id="modal-profile-delete-confirm" type="button">Eliminar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="perfil-modal" id="modal-logout" role="dialog" aria-modal="true" aria-label="Confirmar cierre de sesion">
+      <div class="perfil-modal__backdrop"></div>
+      <div class="perfil-modal__box">
+        <div class="perfil-modal__icon">Salir</div>
+        <h2 class="perfil-modal__title">Cerrar sesion?</h2>
+        <p class="perfil-modal__desc">
+          Se cerrara tu sesion en este dispositivo. Podras volver a entrar cuando quieras.
+        </p>
+        <div class="perfil-modal__actions">
+          <button class="perfil-modal__cancel" id="modal-logout-cancel" type="button">Cancelar</button>
+          <button class="perfil-modal__confirm" id="modal-logout-confirm" type="button">Cerrar sesion</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="perfil-modal" id="modal-delete" role="dialog" aria-modal="true" aria-label="Confirmar desactivacion de cuenta">
+      <div class="perfil-modal__backdrop"></div>
+      <div class="perfil-modal__box">
+        <div class="perfil-modal__icon">Alerta</div>
+        <h2 class="perfil-modal__title">Desactivar cuenta</h2>
+        <p class="perfil-modal__desc">
+          Esta accion desactiva el acceso de la cuenta principal. Si quieres volver, tendras que reactivarla desde administracion.
+        </p>
+        <div class="perfil-modal__actions">
+          <button class="perfil-modal__cancel" id="modal-delete-cancel" type="button">Cancelar</button>
+          <button class="perfil-modal__confirm" id="modal-delete-confirm" type="button">Desactivar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="perfil-modal" id="modal-change-password" role="dialog" aria-modal="true" aria-label="Cambiar contraseña">
+      <div class="perfil-modal__backdrop"></div>
+      <div class="perfil-modal__box">
+    
+        <!-- Paso 1: solicitar código -->
+        <div id="cp-step-1">
+          <h2 class="perfil-modal__title">Cambiar contraseña</h2>
+          <p class="perfil-modal__desc">
+            Te enviaremos un código de verificación a tu correo para confirmar el cambio.
+          </p>
+          <p class="perfil-inline-note perfil-inline-note--error" id="cp-error-1" hidden></p>
+          <div class="perfil-modal__actions">
+            <button class="perfil-modal__cancel" id="cp-cancel-1" type="button">Cancelar</button>
+            <button class="perfil-modal__confirm" id="cp-send-code" type="button">Enviar código</button>
+          </div>
+        </div>
+    
+        <!-- Paso 2: verificar código -->
+        <div id="cp-step-2" hidden>
+          <h2 class="perfil-modal__title">Introduce el código</h2>
+          <p class="perfil-modal__desc" id="cp-desc-2">
+            Hemos enviado un código de 6 dígitos a tu correo. Tienes 15 minutos para usarlo.
+          </p>
+          <div class="perfil-modal__field">
+            <label class="perfil-modal__label" for="cp-code-input">Código de verificación</label>
+            <input class="perfil-modal__input" id="cp-code-input" type="text" maxlength="6" placeholder="123456" autocomplete="one-time-code" />
+          </div>
+          <p class="perfil-inline-note perfil-inline-note--error" id="cp-error-2" hidden></p>
+          <div class="perfil-modal__actions">
+            <button class="perfil-modal__cancel" id="cp-cancel-2" type="button">Cancelar</button>
+            <button class="perfil-modal__confirm" id="cp-verify-code" type="button">Verificar</button>
+          </div>
+        </div>
+    
+        <!-- Paso 3: nueva contraseña -->
+        <div id="cp-step-3" hidden>
+          <h2 class="perfil-modal__title">Nueva contraseña</h2>
+          <p class="perfil-modal__desc">Elige una contraseña segura de al menos 6 caracteres.</p>
+          <div class="perfil-modal__field">
+            <label class="perfil-modal__label" for="cp-new-password">Nueva contraseña</label>
+            <input class="perfil-modal__input" id="cp-new-password" type="password" autocomplete="new-password" />
+          </div>
+          <div class="perfil-modal__field">
+            <label class="perfil-modal__label" for="cp-confirm-password">Confirmar contraseña</label>
+            <input class="perfil-modal__input" id="cp-confirm-password" type="password" autocomplete="new-password" />
+          </div>
+          <p class="perfil-inline-note perfil-inline-note--error" id="cp-error-3" hidden></p>
+          <div class="perfil-modal__actions">
+            <button class="perfil-modal__cancel" id="cp-cancel-3" type="button">Cancelar</button>
+            <button class="perfil-modal__confirm" id="cp-save-password" type="button">Guardar</button>
+          </div>
+        </div>
+    
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="../js/api_IP.js"></script>
+    <script src="../js/script.js" defer></script>
+    <script src="../js/cuenta.js" defer></script>
+  </body> 
+</html>

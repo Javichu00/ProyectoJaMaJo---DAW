@@ -1,91 +1,49 @@
 package com.jamajo.backend.entity;
 
 import jakarta.persistence.*;
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "resena")
+@Table(name = "Resena")
 public class Resena {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id_resena")
+    private Long idResena;
 
     @ManyToOne
-    @JoinColumn(name = "email_usuario", nullable = false)
-    private Usuario usuario;
+    @JoinColumn(name = "id_cuenta", nullable = false)
+    private Cuenta cuenta;
 
     @ManyToOne
     @JoinColumn(name = "id_contenido", nullable = false)
     private Contenido contenido;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String texto;
 
-    @Column(name = "fecha_publicacion")
-    private LocalDate fechaPublicacion;
+    @Column(nullable = false)
+    private Integer puntuacion;
 
-    @Column(name = "cant_estrellas")
-    private Integer cantEstrellas;
+    @Column(name = "fecha_creacion", nullable = false, updatable = false)
+    private LocalDateTime fechaCreacion;
 
-    public Resena() {
+    public Resena() {}
+
+    @PrePersist
+    public void prePersist() {
+        this.fechaCreacion = LocalDateTime.now();
     }
 
-    public Resena(Long id, Usuario usuario, Contenido contenido, String texto, LocalDate fechaPublicacion, Integer cantEstrellas) {
-        this.id = id;
-        this.usuario = usuario;
-        this.contenido = contenido;
-        this.texto = texto;
-        this.fechaPublicacion = fechaPublicacion;
-        this.cantEstrellas = cantEstrellas;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Contenido getContenido() {
-        return contenido;
-    }
-
-    public void setContenido(Contenido contenido) {
-        this.contenido = contenido;
-    }
-
-    public String getTexto() {
-        return texto;
-    }
-
-    public void setTexto(String texto) {
-        this.texto = texto;
-    }
-
-    public LocalDate getFechaPublicacion() {
-        return fechaPublicacion;
-    }
-
-    public void setFechaPublicacion(LocalDate fechaPublicacion) {
-        this.fechaPublicacion = fechaPublicacion;
-    }
-
-    public Integer getCantEstrellas() {
-        return cantEstrellas;
-    }
-
-    public void setCantEstrellas(Integer cantEstrellas) {
-        this.cantEstrellas = cantEstrellas;
-    }
+    public Long getIdResena() { return idResena; }
+    public Cuenta getCuenta() { return cuenta; }
+    public void setCuenta(Cuenta cuenta) { this.cuenta = cuenta; }
+    public Contenido getContenido() { return contenido; }
+    public void setContenido(Contenido contenido) { this.contenido = contenido; }
+    public String getTexto() { return texto; }
+    public void setTexto(String texto) { this.texto = texto; }
+    public Integer getPuntuacion() { return puntuacion; }
+    public void setPuntuacion(Integer puntuacion) { this.puntuacion = puntuacion; }
+    public LocalDateTime getFechaCreacion() { return fechaCreacion; }
 }

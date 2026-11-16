@@ -3,10 +3,11 @@ package com.jamajo.backend.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "contenido_categoria")
+@Table(name = "ContenidoPerteneceACategoria")
 public class ContenidoPerteneceACategoria {
 
     @Id
+    @Column(name="id_relacion")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -15,7 +16,7 @@ public class ContenidoPerteneceACategoria {
     private Contenido contenido;
 
     @ManyToOne
-    @JoinColumn(name = "nombre_categoria", nullable = false)
+    @JoinColumn(name = "nombreCategoria", nullable = false)
     private Categoria categoria;
 
     public ContenidoPerteneceACategoria() {

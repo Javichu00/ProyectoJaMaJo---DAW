@@ -1,0 +1,228 @@
+
+--- Query 250 ---
+UPDATE Contenido SET id_tmdb = 253 WHERE id_api = 'tt0070328'
+ERROR: 1062 (23000): Duplicate entry '253' for key 'contenido.id_tmdb'
+
+--- Query 468 ---
+UPDATE Contenido SET id_tmdb = 1678 WHERE id_api = 'tt0088526'
+ERROR: 1062 (23000): Duplicate entry '1678' for key 'contenido.id_tmdb'
+
+--- Query 563 ---
+UPDATE Contenido SET id_tmdb = 655 WHERE id_api = 'tt0092455'
+ERROR: 1062 (23000): Duplicate entry '655' for key 'contenido.id_tmdb'
+
+--- Query 604 ---
+UPDATE Contenido SET id_tmdb = 790 WHERE id_api = 'tt0094525'
+ERROR: 1062 (23000): Duplicate entry '790' for key 'contenido.id_tmdb'
+
+--- Query 697 ---
+UPDATE Contenido SET id_tmdb = 1892 WHERE id_api = 'tt0098800'
+ERROR: 1062 (23000): Duplicate entry '1892' for key 'contenido.id_tmdb'
+
+--- Query 834 ---
+UPDATE Contenido SET id_tmdb = 580 WHERE id_api = 'tt0106145'
+ERROR: 1062 (23000): Duplicate entry '580' for key 'contenido.id_tmdb'
+
+--- Query 1147 ---
+UPDATE Contenido SET id_tmdb = 1813 WHERE id_api = 'tt0118971'
+ERROR: 1062 (23000): Duplicate entry '1813' for key 'contenido.id_tmdb'
+
+--- Query 1221 ---
+UPDATE Contenido SET id_tmdb = 95 WHERE id_api = 'tt0120591'
+ERROR: 1062 (23000): Duplicate entry '95' for key 'contenido.id_tmdb'
+
+--- Query 1351 ---
+UPDATE Contenido SET id_tmdb = 1398 WHERE id_api = 'tt0141842'
+ERROR: 1062 (23000): Duplicate entry '1398' for key 'contenido.id_tmdb'
+
+--- Query 1389 ---
+UPDATE Contenido SET id_tmdb = 105 WHERE id_api = 'tt0159206'
+ERROR: 1062 (23000): Duplicate entry '105' for key 'contenido.id_tmdb'
+
+--- Query 1395 ---
+UPDATE Contenido SET id_tmdb = 4327 WHERE id_api = 'tt0160127'
+ERROR: 1062 (23000): Duplicate entry '4327' for key 'contenido.id_tmdb'
+
+--- Query 1441 ---
+UPDATE Contenido SET id_tmdb = 607 WHERE id_api = 'tt0175058'
+ERROR: 1062 (23000): Duplicate entry '607' for key 'contenido.id_tmdb'
+
+--- Query 1450 ---
+UPDATE Contenido SET id_tmdb = 926 WHERE id_api = 'tt0177789'
+ERROR: 1062 (23000): Duplicate entry '926' for key 'contenido.id_tmdb'
+
+--- Query 1477 ---
+UPDATE Contenido SET id_tmdb = 745 WHERE id_api = 'tt0187664'
+ERROR: 1062 (23000): Duplicate entry '745' for key 'contenido.id_tmdb'
+
+--- Query 1492 ---
+UPDATE Contenido SET id_tmdb = 688 WHERE id_api = 'tt0200276'
+ERROR: 1062 (23000): Duplicate entry '688' for key 'contenido.id_tmdb'
+
+--- Query 1505 ---
+UPDATE Contenido SET id_tmdb = 387 WHERE id_api = 'tt0206512'
+ERROR: 1062 (23000): Duplicate entry '387' for key 'contenido.id_tmdb'
+
+--- Query 1542 ---
+UPDATE Contenido SET id_tmdb = 2085 WHERE id_api = 'tt0220880'
+ERROR: 1062 (23000): Duplicate entry '2085' for key 'contenido.id_tmdb'
+
+--- Query 1581 ---
+UPDATE Contenido SET id_tmdb = 605 WHERE id_api = 'tt0242653'
+ERROR: 1062 (23000): Duplicate entry '605' for key 'contenido.id_tmdb'
+
+--- Query 1600 ---
+UPDATE Contenido SET id_tmdb = 141 WHERE id_api = 'tt0246578'
+ERROR: 1062 (23000): Duplicate entry '141' for key 'contenido.id_tmdb'
+
+--- Query 1641 ---
+UPDATE Contenido SET id_tmdb = 903 WHERE id_api = 'tt0262150'
+ERROR: 1062 (23000): Duplicate entry '903' for key 'contenido.id_tmdb'
+
+--- Query 1678 ---
+UPDATE Contenido SET id_tmdb = 2140 WHERE id_api = 'tt0271027'
+ERROR: 1062 (23000): Duplicate entry '2140' for key 'contenido.id_tmdb'
+
+--- Query 1719 ---
+UPDATE Contenido SET id_tmdb = 2046 WHERE id_api = 'tt0285333'
+ERROR: 1062 (23000): Duplicate entry '2046' for key 'contenido.id_tmdb'
+
+--- Query 1849 ---
+UPDATE Contenido SET id_tmdb = 185 WHERE id_api = 'tt0319969'
+ERROR: 1062 (23000): Duplicate entry '185' for key 'contenido.id_tmdb'
+
+--- Query 1867 ---
+UPDATE Contenido SET id_tmdb = 2122 WHERE id_api = 'tt0327247'
+ERROR: 1062 (23000): Duplicate entry '2122' for key 'contenido.id_tmdb'
+
+--- Query 1869 ---
+UPDATE Contenido SET id_tmdb = 314 WHERE id_api = 'tt0327554'
+ERROR: 1062 (23000): Duplicate entry '314' for key 'contenido.id_tmdb'
+
+--- Query 1894 ---
+UPDATE Contenido SET id_tmdb = 615 WHERE id_api = 'tt0335345'
+ERROR: 1062 (23000): Duplicate entry '615' for key 'contenido.id_tmdb'
+
+--- Query 1932 ---
+UPDATE Contenido SET id_tmdb = 1406 WHERE id_api = 'tt0348914'
+ERROR: 1062 (23000): Duplicate entry '1406' for key 'contenido.id_tmdb'
+
+--- Query 1941 ---
+UPDATE Contenido SET id_tmdb = 713 WHERE id_api = 'tt0353049'
+ERROR: 1062 (23000): Duplicate entry '713' for key 'contenido.id_tmdb'
+
+--- Query 1965 ---
+UPDATE Contenido SET id_tmdb = 1777 WHERE id_api = 'tt0361596'
+ERROR: 1062 (23000): Duplicate entry '1777' for key 'contenido.id_tmdb'
+
+--- Query 1989 ---
+UPDATE Contenido SET id_tmdb = 4614 WHERE id_api = 'tt0364845'
+ERROR: 1062 (23000): Duplicate entry '4614' for key 'contenido.id_tmdb'
+
+--- Query 2015 ---
+UPDATE Contenido SET id_tmdb = 269 WHERE id_api = 'tt0368530'
+ERROR: 1062 (23000): Duplicate entry '269' for key 'contenido.id_tmdb'
+
+--- Query 2086 ---
+UPDATE Contenido SET id_tmdb = 1428 WHERE id_api = 'tt0383126'
+ERROR: 1062 (23000): Duplicate entry '1428' for key 'contenido.id_tmdb'
+
+--- Query 2095 ---
+UPDATE Contenido SET id_tmdb = 1891 WHERE id_api = 'tt0384766'
+ERROR: 1062 (23000): Duplicate entry '1891' for key 'contenido.id_tmdb'
+
+--- Query 2153 ---
+UPDATE Contenido SET id_tmdb = 1433 WHERE id_api = 'tt0397306'
+ERROR: 1062 (23000): Duplicate entry '1433' for key 'contenido.id_tmdb'
+
+--- Query 2210 ---
+UPDATE Contenido SET id_tmdb = 693 WHERE id_api = 'tt0410975'
+ERROR: 1062 (23000): Duplicate entry '693' for key 'contenido.id_tmdb'
+
+--- Query 2239 ---
+UPDATE Contenido SET id_tmdb = 246 WHERE id_api = 'tt0417299'
+ERROR: 1062 (23000): Duplicate entry '246' for key 'contenido.id_tmdb'
+
+--- Query 2287 ---
+UPDATE Contenido SET id_tmdb = 1667 WHERE id_api = 'tt0428803'
+ERROR: 1062 (23000): Duplicate entry '1667' for key 'contenido.id_tmdb'
+
+--- Query 2304 ---
+UPDATE Contenido SET id_tmdb = 578 WHERE id_api = 'tt0433309'
+ERROR: 1062 (23000): Duplicate entry '578' for key 'contenido.id_tmdb'
+
+--- Query 2321 ---
+UPDATE Contenido SET id_tmdb = 709 WHERE id_api = 'tt0437745'
+ERROR: 1062 (23000): Duplicate entry '709' for key 'contenido.id_tmdb'
+
+--- Query 2326 ---
+UPDATE Contenido SET id_tmdb = 186 WHERE id_api = 'tt0439100'
+ERROR: 1062 (23000): Duplicate entry '186' for key 'contenido.id_tmdb'
+
+--- Query 2372 ---
+UPDATE Contenido SET id_tmdb = 2207 WHERE id_api = 'tt0450232'
+ERROR: 1062 (23000): Duplicate entry '2207' for key 'contenido.id_tmdb'
+
+--- Query 2397 ---
+UPDATE Contenido SET id_tmdb = 2288 WHERE id_api = 'tt0455275'
+ERROR: 1062 (23000): Duplicate entry '2288' for key 'contenido.id_tmdb'
+
+--- Query 2423 ---
+UPDATE Contenido SET id_tmdb = 252 WHERE id_api = 'tt0460637'
+ERROR: 1062 (23000): Duplicate entry '252' for key 'contenido.id_tmdb'
+
+--- Query 2426 ---
+UPDATE Contenido SET id_tmdb = 1911 WHERE id_api = 'tt0460627'
+ERROR: 1062 (23000): Duplicate entry '1911' for key 'contenido.id_tmdb'
+
+--- Query 2447 ---
+UPDATE Contenido SET id_tmdb = 1620 WHERE id_api = 'tt0465494'
+ERROR: 1062 (23000): Duplicate entry '1620' for key 'contenido.id_tmdb'
+
+--- Query 2463 ---
+UPDATE Contenido SET id_tmdb = 155 WHERE id_api = 'tt0468569'
+ERROR: 1062 (23000): Duplicate entry '155' for key 'contenido.id_tmdb'
+
+--- Query 2518 ---
+UPDATE Contenido SET id_tmdb = 424 WHERE id_api = 'tt0485301'
+ERROR: 1062 (23000): Duplicate entry '424' for key 'contenido.id_tmdb'
+
+--- Query 2632 ---
+UPDATE Contenido SET id_tmdb = 4588 WHERE id_api = 'tt0808357'
+ERROR: 1062 (23000): Duplicate entry '4588' for key 'contenido.id_tmdb'
+
+--- Query 2641 ---
+UPDATE Contenido SET id_tmdb = 1639 WHERE id_api = 'tt0813715'
+ERROR: 1062 (23000): Duplicate entry '1639' for key 'contenido.id_tmdb'
+
+--- Query 2681 ---
+UPDATE Contenido SET id_tmdb = 900 WHERE id_api = 'tt0840196'
+ERROR: 1062 (23000): Duplicate entry '900' for key 'contenido.id_tmdb'
+
+--- Query 2683 ---
+UPDATE Contenido SET id_tmdb = 10545 WHERE id_api = 'tt0844441'
+ERROR: 1062 (23000): Duplicate entry '10545' for key 'contenido.id_tmdb'
+
+--- Query 2692 ---
+UPDATE Contenido SET id_tmdb = 433 WHERE id_api = 'tt0851851'
+ERROR: 1062 (23000): Duplicate entry '433' for key 'contenido.id_tmdb'
+
+--- Query 2712 ---
+UPDATE Contenido SET id_tmdb = 2742 WHERE id_api = 'tt0863046'
+ERROR: 1062 (23000): Duplicate entry '2742' for key 'contenido.id_tmdb'
+
+--- Query 2749 ---
+UPDATE Contenido SET id_tmdb = 1396 WHERE id_api = 'tt0903747'
+ERROR: 1062 (23000): Duplicate entry '1396' for key 'contenido.id_tmdb'
+
+--- Query 2801 ---
+UPDATE Contenido SET id_tmdb = 1621 WHERE id_api = 'tt0979432'
+ERROR: 1062 (23000): Duplicate entry '1621' for key 'contenido.id_tmdb'
+
+--- Query 3285 ---
+UPDATE Contenido SET id_tmdb = 8358 WHERE id_api = 'tt1235099'
+ERROR: 1062 (23000): Duplicate entry '8358' for key 'contenido.id_tmdb'
+
+--- Query 3323 ---
+UPDATE Contenido SET id_tmdb = 8592 WHERE id_api = 'tt1266020'
+ERROR: 1062 (23000): Duplicate entry '8592' for key 'contenido.id_tmdb'

@@ -1,266 +1,155 @@
 ;(function () {
-    // ============================================================
-    // DATOS MOCK
-    // ============================================================
-  
-    const mockData = {
-      users: [
-        { id: 1, name: 'Maria Gonzalez', email: 'maria.g@email.com', status: 'active',  registered: '2026-01-15', purchases: 12 },
-        { id: 2, name: 'Juan Perez',     email: 'juan.p@email.com',  status: 'active',  registered: '2026-02-20', purchases: 8  },
-        { id: 3, name: 'Ana Martinez',   email: 'ana.m@email.com',   status: 'blocked', registered: '2025-11-10', purchases: 3  },
-        { id: 4, name: 'Carlos Lopez',   email: 'carlos.l@email.com',status: 'active',  registered: '2026-03-05', purchases: 15 },
-        { id: 5, name: 'Laura Sanchez',  email: 'laura.s@email.com', status: 'active',  registered: '2026-01-28', purchases: 6  },
-      ],
-  
-      content: [
-        { id: 1, title: 'Stranger Things S5', genre: 'Ciencia Ficcion', price: '9.99',  status: 'active' },
-        { id: 2, title: 'The Last of Us',     genre: 'Drama / Accion',  price: '12.99', status: 'active' },
-        { id: 3, title: 'Breaking Bad',       genre: 'Drama / Crimen',  price: '8.99',  status: 'active' },
-        { id: 4, title: 'The Crown',          genre: 'Drama / Historia',price: '10.99', status: 'active' },
-        { id: 5, title: 'Succession',         genre: 'Drama',           price: '11.99', status: 'active' },
-        { id: 6, title: 'The Witcher S4',     genre: 'Fantasia',        price: '9.99',  status: 'draft'  },
-      ],
-  
-      carts: [
-        {
-          id: 1,
-          userName: 'Maria Gonzalez', userEmail: 'maria.g@email.com',
-          items: [
-            { id: 1, title: 'Stranger Things S5', price: 9.99,  addedAt: '2026-04-20 14:30' },
-            { id: 2, title: 'The Crown',          price: 10.99, addedAt: '2026-04-20 14:35' },
-          ],
-          total: 20.98, lastUpdate: '2026-04-20 14:35',
-        },
-        {
-          id: 2,
-          userName: 'Juan Perez', userEmail: 'juan.p@email.com',
-          items: [
-            { id: 3, title: 'The Last of Us', price: 12.99, addedAt: '2026-04-19 10:15' },
-          ],
-          total: 12.99, lastUpdate: '2026-04-19 10:15',
-        },
-        {
-          id: 3,
-          userName: 'Carlos Lopez', userEmail: 'carlos.l@email.com',
-          items: [
-            { id: 4, title: 'Breaking Bad',   price: 8.99,  addedAt: '2026-04-21 09:20' },
-            { id: 5, title: 'Succession',     price: 11.99, addedAt: '2026-04-21 09:25' },
-            { id: 6, title: 'The Witcher S4', price: 9.99,  addedAt: '2026-04-21 09:30' },
-          ],
-          total: 30.97, lastUpdate: '2026-04-21 09:30',
-        },
-      ],
-  
-      transactions: [
-        { id: 'TX-12456', user: 'Maria Gonzalez', product: 'Stranger Things S5', date: '2026-04-20', amount: '9.99',  status: 'completed' },
-        { id: 'TX-12457', user: 'Juan Perez',     product: 'The Last of Us',     date: '2026-04-20', amount: '12.99', status: 'completed' },
-        { id: 'TX-12458', user: 'Ana Martinez',   product: 'Breaking Bad',       date: '2026-04-19', amount: '8.99',  status: 'failed'    },
-        { id: 'TX-12459', user: 'Carlos Lopez',   product: 'The Crown',          date: '2026-04-19', amount: '10.99', status: 'completed' },
-        { id: 'TX-12460', user: 'Laura Sanchez',  product: 'Succession',         date: '2026-04-18', amount: '11.99', status: 'pending'   },
-      ],
-    }
-  
-    // ============================================================
-    // HELPERS
-    // ============================================================
-  
-    const esc = (window.JAM && window.JAM.escapeHtml) || ((v) => String(v)
-      .replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
-      .replaceAll('"', '&quot;').replaceAll("'", '&#39;'))
-  
-    function badge(status) {
+
+  const esc = (window.JAM && window.JAM.escapeHtml) || ((v) => String(v ?? '')
+    .replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')
+    .replaceAll('"','&quot;').replaceAll("'",'&#39;'))
+
+    function badge(type) {
       const map = {
-        active:    ['dash-badge--ok',   '✓ Activo'],
-        blocked:   ['dash-badge--err',  '✗ Bloqueado'],
-        completed: ['dash-badge--ok',   '✓ Completado'],
-        failed:    ['dash-badge--err',  '✗ Fallido'],
-        pending:   ['dash-badge--warn', '⏱ Pendiente'],
-        draft:     ['dash-badge--warn', 'Borrador'],
-        active_content: ['dash-badge--ok', 'Activo'],
+        true:      ['ok',   'Activo'],
+        false:     ['err',  'Inactivo'],
+        ADMIN:     ['gold', 'Admin'],
+        CLIENTE:   ['info', 'Cliente'],
+        GRATIS:    ['info', 'Gratis'],
+        ANUNCIOS:  ['warn', 'Anuncios'],
+        ESTANDAR:  ['up',   'Estándar'],
+        PRO:       ['gold', 'Pro'],
       }
-      const [mod, label] = map[status] ?? ['dash-badge--info', status]
-      return `<span class="dash-badge ${mod}">${esc(label)}</span>`
+      const [mod, label] = map[String(type)] ?? ['info', String(type)]
+      return `<span class="dash-badge dash-badge--${mod}">${esc(label)}</span>`
     }
-  
-    function avatar(name, size) {
-      const sz = size || '32px'
-      return `<div class="dash-avatar" style="width:${sz};height:${sz}">${esc(name.charAt(0))}</div>`
-    }
-  
-    function statCard(label, value, trend, badgeText, iconSvg) {
-      return `
-        <div class="dash-stat">
-          <div class="dash-stat-head">
-            <div class="dash-stat-icon">${iconSvg}</div>
-            <span class="dash-badge dash-badge--${trend}">${esc(badgeText)}</span>
-          </div>
-          <div class="dash-stat-label eyebrow">${esc(label)}</div>
-          <div class="dash-stat-value">${esc(value)}</div>
-        </div>
-      `
-    }
-  
-    // ============================================================
-    // NAVEGACION
-    // ============================================================
-  
-    function bindNav() {
-      const navItems = document.querySelectorAll('.dash-nav-item')
-  
-      navItems.forEach((item) => {
-        item.addEventListener('click', () => {
-          navItems.forEach((n) => n.classList.remove('active'))
-          item.classList.add('active')
-          loadSection(item.dataset.section)
-        })
+
+  function avatar(name) {
+    return `<div class="dash-avatar">${esc(String(name || '?').charAt(0).toUpperCase())}</div>`
+  }
+
+  function fmt(date) {
+    if (!date) return '—'
+    return new Date(date).toLocaleDateString('es-ES', { day:'2-digit', month:'short', year:'numeric' })
+  }
+
+  function money(amount) {
+    return Number(amount || 0).toLocaleString('es-ES', { style:'currency', currency:'EUR' })
+  }
+
+  function loading() {
+    return `<div style="padding:3rem;text-align:center;opacity:.4;font-size:.875rem;">Cargando…</div>`
+  }
+
+  function errorMsg(msg) {
+    return `<div style="padding:2rem;text-align:center;color:#ef4444;font-size:.875rem;">${esc(msg)}</div>`
+  }
+
+  function toast(msg, type = 'ok') {
+    const colors = { ok: '#4ade80', err: '#f87171', info: 'var(--mist-deep)' }
+    const t = document.createElement('div')
+    t.style.cssText = `
+      position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;
+      padding:.75rem 1.25rem;border-radius:1rem;font-size:.82rem;font-weight:600;
+      background:rgba(32,33,38,.98);border:1px solid rgba(204,211,217,.16);
+      color:${colors[type] || colors.info};
+      box-shadow:0 12px 32px rgba(0,0,0,.5);
+    `
+    t.textContent = msg
+    document.body.appendChild(t)
+    setTimeout(() => t.remove(), 3000)
+  }
+
+
+  let _modalResolve = null
+
+  function openModal(title, bodyHtml, confirmLabel = 'Confirmar', danger = false) {
+    return new Promise(resolve => {
+      _modalResolve = resolve
+      const m = document.getElementById('dashGenericModal')
+      m.querySelector('.dash-modal-head h3').textContent = title
+      m.querySelector('.dash-modal-body').innerHTML = bodyHtml
+      const btn = m.querySelector('.dash-modal-confirm')
+      btn.textContent = confirmLabel
+      btn.className = `dash-btn ${danger ? 'dash-btn--danger' : 'dash-btn--primary'} dash-modal-confirm`
+      m.classList.add('active')
+    })
+  }
+
+  function closeModal(val) {
+    document.getElementById('dashGenericModal').classList.remove('active')
+    if (_modalResolve) { _modalResolve(val); _modalResolve = null }
+  }
+
+
+  function bindNav() {
+    document.querySelectorAll('.dash-nav-item').forEach(item => {
+      item.addEventListener('click', () => {
+        document.querySelectorAll('.dash-nav-item').forEach(n => n.classList.remove('active'))
+        item.classList.add('active')
+        loadSection(item.dataset.section)
       })
-    }
-  
-    function loadSection(section) {
-      const content = document.getElementById('dash-content')
-      if (!content) return
-      content.innerHTML = ''
-  
-      const map = {
-        overview:     sectionOverview,
-        users:        sectionUsers,
-        content:      sectionContent,
-        transactions: sectionTransactions,
-        analytics:    sectionAnalytics,
-        carts:        sectionCarts,
-        settings:     sectionSettings,
-        security:     sectionSecurity,
-      }
-  
-      const fn = map[section]
-      if (fn) content.innerHTML = fn()
-  
-      // Pasar items del dashboard al buscador del menu
-      if (window.JAM) {
-        window.JAM.setSearchIndex(buildDashSearchIndex())
-      }
-    }
-  
-    // ============================================================
-    // INDICE DE BUSQUEDA DEL MENU
-    // ============================================================
-  
-    function buildDashSearchIndex() {
-      const items = []
-  
-      mockData.users.forEach((u) => {
-        items.push({
-          title: u.name,
-          category: 'Usuario',
-          note: u.email,
-          href: '#',
-        })
+    })
+  }
+
+  function loadSection(section) {
+    const content = document.getElementById('dash-content')
+    if (!content) return
+    content.innerHTML = loading()
+    const map = { usuarios: sectionUsuarios, pagos: sectionPagos, planes: sectionPlanes }
+    const fn = map[section]
+    if (fn) fn(content)
+  }
+
+  async function sectionUsuarios(content) {
+    try {
+      const usuarios = await fetch(`${API_BASE}/usuarios`).then(r => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
+        return r.json()
       })
-  
-      mockData.content.forEach((c) => {
-        items.push({
-          title: c.title,
-          category: c.genre,
-          note: `$${c.price}`,
-          href: '#',
-        })
-      })
-  
-      return items
-    }
-  
-    // ============================================================
-    // SECCIONES
-    // ============================================================
-  
-    function sectionOverview() {
-      const popular = [
-        { title: 'Stranger Things S5', views: 124500, revenue: '$12.450' },
-        { title: 'The Last of Us',     views: 98200,  revenue: '$9.820'  },
-        { title: 'Breaking Bad',       views: 87300,  revenue: '$8.730'  },
-        { title: 'The Crown',          views: 76100,  revenue: '$7.610'  },
-      ]
-  
-      const rankHtml = popular.map((item, i) => `
-        <div class="dash-rank-item">
-          <div class="dash-flex dash-items-c dash-gap-2">
-            <div class="dash-rank-num">${i + 1}</div>
-            <div>
-              <div class="dash-rank-title">${esc(item.title)}</div>
-              <div class="dash-rank-views">${item.views.toLocaleString('es-ES')} visualizaciones</div>
-            </div>
-          </div>
-          <div class="dash-rank-revenue">${esc(item.revenue)}</div>
-        </div>
-      `).join('')
-  
-      return `
-        <div class="dash-section">
-          <div class="dash-section-head">
-            <div class="eyebrow">Dashboard</div>
-            <h2>Panel General</h2>
-            <p>Resumen de metricas clave de la plataforma</p>
-          </div>
-  
-          <div class="dash-grid dash-grid-4 dash-mb-4">
-            ${statCard('Usuarios Activos',    '24.563', 'up',   '↑ 12.5%', iconUsers())}
-            ${statCard('Ingresos del Mes',    '$124.560','up',  '↑ 8.2%',  iconMoney())}
-            ${statCard('Ventas Totales',      '8.945',  'up',   '↑ 5.4%',  iconBag())}
-            ${statCard('Tasa de Conversion',  '3.24%',  'down', '↓ 0.8%',  iconConv())}
-          </div>
-  
-          <div class="dash-card">
-            <div class="eyebrow dash-mb-2">Ranking</div>
-            <h3 style="font-size:1.1rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:1.1rem;">
-              Contenido mas popular
-            </h3>
-            ${rankHtml}
-          </div>
-        </div>
-      `
-    }
-  
-    function sectionUsers() {
-      const rows = mockData.users.map((u) => `
+
+      usuarios.sort((a, b) => new Date(b.fechaRegistro || 0) - new Date(a.fechaRegistro || 0))
+
+      const rows = usuarios.map(u => `
         <tr>
           <td>
-            <div class="dash-flex dash-items-c dash-gap-2">
-              ${avatar(u.name, '32px')}
-              <span style="font-weight:500">${esc(u.name)}</span>
+            <div style="display:flex;align-items:center;gap:.6rem">
+              ${avatar(u.email)}
+              <div style="font-size:.72rem;opacity:.7">${esc(u.email)}</div>
             </div>
           </td>
-          <td style="color:var(--slate)">${esc(u.email)}</td>
-          <td>${badge(u.status)}</td>
-          <td style="color:var(--slate)">${esc(u.registered)}</td>
-          <td style="font-weight:600">${u.purchases}</td>
+          <td>${badge(u.enabled)}</td>
+          <td>${badge(u.tipoUsuario || 'CLIENTE')}</td>
+          <td>${badge(u.nombrePlan || 'GRATIS')}</td>
+          <td style="opacity:.6;font-size:.8rem">${fmt(u.fechaRegistro)}</td>
           <td>
-            <div class="dash-flex dash-gap-1">
-              <button class="dash-btn dash-btn--ghost dash-btn--sm">Editar</button>
-              <button class="dash-btn dash-btn--danger dash-btn--sm">Eliminar</button>
+            <div style="display:flex;gap:.4rem;flex-wrap:wrap">
+              <button class="dash-btn dash-btn--sm dash-btn--secondary"
+                onclick="dashVerUsuario('${esc(u.email)}')">
+                Ver
+              </button>
+              <button class="dash-btn dash-btn--sm ${u.enabled ? 'dash-btn--danger' : 'dash-btn--success'}"
+                onclick="dashDeleteUser('${esc(u.email)}', ${u.enabled})">
+                ${u.enabled ? 'Eliminar' : 'Habilitar'}
+              </button>
             </div>
           </td>
         </tr>
       `).join('')
-  
-      return `
+
+      content.innerHTML = `
         <div class="dash-section">
-          <div class="dash-section-actions">
-            <div class="dash-section-head">
-              <div class="eyebrow">Gestion</div>
+          <div class="dash-section-head" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+            <div>
+              <div class="eyebrow">Gestión</div>
               <h2>Usuarios</h2>
-              <p>Administra y monitorea usuarios de la plataforma</p>
+              <p>${usuarios.length} usuario${usuarios.length !== 1 ? 's' : ''} registrados</p>
             </div>
-            <button class="dash-btn dash-btn--primary">
-              ${iconPlus()} Anadir Usuario
+            <button class="dash-btn dash-btn--primary" onclick="dashCrearUsuario()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+              Nuevo usuario
             </button>
           </div>
-  
-          <div class="dash-table-wrap">
+          <div class="dash-table-wrap" style="margin-top:1rem">
             <table>
               <thead>
                 <tr>
-                  <th>Usuario</th><th>Email</th><th>Estado</th>
-                  <th>Registro</th><th>Compras</th><th>Acciones</th>
+                  <th>Usuario</th><th>Estado</th><th>Rol</th><th>Plan</th><th>Registro</th><th>Acciones</th>
                 </tr>
               </thead>
               <tbody>${rows}</tbody>
@@ -268,378 +157,535 @@
           </div>
         </div>
       `
+    } catch (err) {
+      content.innerHTML = errorMsg('No se pudieron cargar los usuarios: ' + err.message)
     }
-  
-    function sectionContent() {
-      const cards = mockData.content.map((item) => `
-        <div class="dash-poster-card">
-          <div class="dash-poster-thumb">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-              <rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 8 6 4-6 4Z"/>
-            </svg>
+  }
+
+  window.dashVerUsuario = async function(email) {
+    openModal(`Detalle: ${email}`,
+      `<div style="padding:1rem;text-align:center;opacity:.4;font-size:.82rem">Cargando…</div>`,
+      'Cerrar', false).then(() => {})
+
+    try {
+      const [usuario, cuentas] = await Promise.all([
+        fetch(`${API_BASE}/usuarios/${encodeURIComponent(email)}`).then(r => r.json()),
+        fetch(`${API_BASE}/cuentas/${encodeURIComponent(email)}`).then(r => r.ok ? r.json() : []),
+      ])
+
+      const cuentasRows = (Array.isArray(cuentas) ? cuentas : []).map(c => `
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.65rem 0;border-bottom:1px solid rgba(204,211,217,.08)">
+          <div style="display:flex;align-items:center;gap:.6rem">
+            ${c.foto
+              ? `<img src="${esc(c.foto)}" style="width:32px;height:32px;border-radius:50%;object-fit:cover">`
+              : avatar(c.username || c.nombre)}
+            <span style="font-size:.875rem;font-weight:500">${esc(c.username || c.nombre || '—')}</span>
           </div>
-          <div class="dash-poster-info">
-            <div class="dash-poster-title">${esc(item.title)}</div>
-            <div class="dash-poster-genre">${esc(item.genre)}</div>
-            <div class="dash-poster-foot">
-              <span class="dash-poster-price">$${esc(item.price)}</span>
-              ${badge(item.status === 'active' ? 'active' : 'draft')}
-            </div>
-          </div>
+          <button class="dash-btn dash-btn--sm dash-btn--danger"
+            onclick="dashDeleteCuenta(${c.idCuenta}, '${esc(email)}')">
+            Eliminar
+          </button>
         </div>
-      `).join('')
-  
-      return `
-        <div class="dash-section">
-          <div class="dash-section-actions">
-            <div class="dash-section-head">
-              <div class="eyebrow">Catalogo</div>
-              <h2>Contenido</h2>
-              <p>Administra peliculas y series de la plataforma</p>
+      `).join('') || '<p style="opacity:.4;font-size:.82rem;margin:0">Sin cuentas</p>'
+
+      document.querySelector('#dashGenericModal .dash-modal-body').innerHTML = `
+        <div style="display:grid;gap:1.25rem">
+
+          <!-- Info básica -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem">
+            <div class="dash-stat" style="padding:.9rem">
+              <div class="dash-stat-label">Email</div>
+              <div style="font-size:.78rem;color:var(--mist-deep);margin-top:.2rem;word-break:break-all">${esc(usuario.email || email)}</div>
             </div>
-            <button class="dash-btn dash-btn--primary">${iconPlus()} Anadir Contenido</button>
+            <div class="dash-stat" style="padding:.9rem">
+              <div class="dash-stat-label">Plan actual</div>
+              <div style="margin-top:.3rem">${badge(usuario.nombrePlan || 'GRATIS')}</div>
+            </div>
+            <div class="dash-stat" style="padding:.9rem">
+              <div class="dash-stat-label">Estado</div>
+              <div style="margin-top:.3rem">${badge(usuario.enabled)}</div>
+            </div>
+            <div class="dash-stat" style="padding:.9rem">
+              <div class="dash-stat-label">Registro</div>
+              <div style="font-size:.82rem;color:var(--mist-deep);margin-top:.2rem">${fmt(usuario.fechaRegistro)}</div>
+            </div>
           </div>
-          <div class="dash-poster-grid">${cards}</div>
+
+          <!-- Cambiar contraseña -->
+          <div>
+            <div class="eyebrow" style="margin-bottom:.6rem">Cambiar contraseña</div>
+            <div style="display:flex;gap:.5rem">
+              <input class="dash-input" id="newPassInput" type="password" placeholder="Nueva contraseña" style="flex:1" />
+              <button class="dash-btn dash-btn--secondary" onclick="dashCambiarPassword('${esc(email)}')">
+                Guardar
+              </button>
+            </div>
+          </div>
+
+          <!-- Cuentas -->
+          <div>
+            <div class="eyebrow" style="margin-bottom:.6rem">Cuentas (${Array.isArray(cuentas) ? cuentas.length : 0})</div>
+            ${cuentasRows}
+          </div>
+
+          <!-- Cambiar plan -->
+          <div>
+            <div class="eyebrow" style="margin-bottom:.6rem">Cambiar plan</div>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+              ${['GRATIS','ANUNCIOS','ESTANDAR','PRO'].map(p => `
+                <button class="dash-btn dash-btn--sm ${(usuario.nombrePlan||'GRATIS')===p ? 'dash-btn--primary' : 'dash-btn--secondary'}"
+                  onclick="dashCambiarPlan('${esc(email)}', '${p}')">
+                  ${p.charAt(0)+p.slice(1).toLowerCase()}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Cambiar rol -->
+          <div>
+            <div class="eyebrow" style="margin-bottom:.6rem">Rol</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:.75rem;background:rgba(204,211,217,.04);border-radius:var(--radius-md)">
+              <div>
+                <div style="font-size:.875rem;font-weight:600;color:var(--mist-deep)">${esc(usuario.tipoUsuario || 'CLIENTE')}</div>
+                <div style="font-size:.72rem;opacity:.5;margin-top:.2rem">${usuario.tipoUsuario === 'ADMIN' ? 'Acceso total al dashboard' : 'Acceso estándar de usuario'}</div>
+              </div>
+              <button class="dash-btn dash-btn--sm ${usuario.tipoUsuario === 'ADMIN' ? 'dash-btn--danger' : 'dash-btn--secondary'}"
+                onclick="dashToggleRol('${esc(usuario.email || email)}', '${esc(usuario.tipoUsuario || 'CLIENTE')}')">
+                ${usuario.tipoUsuario === 'ADMIN' ? 'Quitar admin' : 'Hacer admin'}
+              </button>
+            </div>
+          </div>
+
         </div>
       `
+    } catch(err) {
+      document.querySelector('#dashGenericModal .dash-modal-body').innerHTML =
+        errorMsg('Error cargando detalle: ' + err.message)
     }
-  
-    function sectionTransactions() {
-      const rows = mockData.transactions.map((tx) => `
-        <tr>
-          <td><span class="dash-mono">${esc(tx.id)}</span></td>
-          <td style="font-weight:500">${esc(tx.user)}</td>
-          <td style="color:var(--slate)">${esc(tx.product)}</td>
-          <td style="color:var(--slate)">${esc(tx.date)}</td>
-          <td style="font-weight:700">$${esc(tx.amount)}</td>
-          <td>${badge(tx.status)}</td>
-          <td>
-            ${tx.status === 'completed'
-              ? `<button class="dash-btn dash-btn--danger dash-btn--sm">Reembolsar</button>`
-              : ''}
-          </td>
-        </tr>
-      `).join('')
-  
-      return `
-        <div class="dash-section">
-          <div class="dash-section-actions">
-            <div class="dash-section-head">
-              <div class="eyebrow">Historial</div>
-              <h2>Compras y Transacciones</h2>
-              <p>Historial y estado de pagos</p>
-            </div>
-            <button class="dash-btn dash-btn--secondary">${iconDownload()} Exportar</button>
-          </div>
-  
-          <div class="dash-table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>ID</th><th>Usuario</th><th>Producto</th>
-                  <th>Fecha</th><th>Monto</th><th>Estado</th><th></th>
-                </tr>
-              </thead>
-              <tbody>${rows}</tbody>
-            </table>
-          </div>
-        </div>
-      `
+  }
+
+  window.dashCambiarPassword = async function(email) {
+    const pass = document.getElementById('newPassInput')?.value?.trim()
+    if (!pass) return toast('Introduce una contraseña', 'err')
+    try {
+      const r = await fetch(`${API_BASE}/usuarios/${encodeURIComponent(email)}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: pass })
+      })
+      if (!r.ok) throw new Error(`HTTP ${r.status}`)
+      document.getElementById('newPassInput').value = ''
+      toast('Contraseña actualizada', 'ok')
+    } catch (err) {
+      toast('Error: ' + err.message, 'err')
     }
+  }
+  window.dashDeleteUser = async function(email, currentEnabled) {
+    if (currentEnabled) {
+      const confirmed = await openModal(
+        'Deshabilitar usuario',
+        `<p style="color:rgba(204,211,217,.78);line-height:1.7">
+          ¿Deshabilitar a <strong style="color:var(--mist-deep)">${esc(email)}</strong>?<br>
+          <span style="font-size:.8rem;opacity:.6">Sus listas y pagos se conservan.</span>
+        </p>`,
+        'Sí, deshabilitar', true
+      )
+      if (!confirmed) return
+      try {
+        const r = await fetch(`${API_BASE}/usuarios/${encodeURIComponent(email)}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ enabled: false })
+        })
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
+        toast('Usuario deshabilitado', 'ok')
+        loadSection('usuarios')
+      } catch (err) {
+        toast('Error: ' + err.message, 'err')
+      }
+    } else {
+      try {
+        const r = await fetch(`${API_BASE}/usuarios/${encodeURIComponent(email)}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ enabled: true })
+        })
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
+        toast('Usuario habilitado', 'ok')
+        loadSection('usuarios')
+      } catch (err) {
+        toast('Error: ' + err.message, 'err')
+      }
+    }
+  }
+
+  window.dashToggleRol = async function(email, currentRol) {
+    const nuevoRol = currentRol === 'ADMIN' ? 'CLIENTE' : 'ADMIN'
+    const confirmed = await openModal(
+      'Cambiar rol',
+      `<p style="color:rgba(204,211,217,.78);line-height:1.7">
+        ¿Cambiar el rol de <strong style="color:var(--mist-deep)">${esc(email)}</strong> a <strong style="color:var(--mist-deep)">${nuevoRol}</strong>?
+      </p>`,
+      'Confirmar', false
+    )
+    if (!confirmed) return
+    try {
+      const r = await fetch(`${API_BASE}/usuarios/${encodeURIComponent(email)}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tipoUsuario: nuevoRol })
+      })
+      if (!r.ok) throw new Error(`HTTP ${r.status}`)
+      toast(`Rol cambiado a ${nuevoRol}`, 'ok')
+      dashVerUsuario(email)
+    } catch (err) {
+      toast('Error: ' + err.message, 'err')
+    }
+  }
+
+  window.dashCrearUsuario = async function() {
+    const confirmed = await openModal(
+      'Nuevo usuario',
+      `<div class="dash-input-group">
+        <label>Email</label>
+        <input class="dash-input" id="newEmail" type="email" placeholder="usuario@ejemplo.com" />
+      </div>
+      <div class="dash-input-group">
+        <label>Contraseña</label>
+        <input class="dash-input" id="newPassword" type="password" placeholder="Contraseña" />
+      </div>`,
+      'Crear usuario', false
+    )
+    if (!confirmed) return
+    const email    = document.getElementById('newEmail')?.value?.trim()
+    const password = document.getElementById('newPassword')?.value?.trim()
+    if (!email || !password) return toast('Email y contraseña son obligatorios', 'err')
+    try {
+      const r = await fetch(`${API_BASE}/usuarios`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      })
+      if (!r.ok) throw new Error(`HTTP ${r.status}`)
+      toast('Usuario creado correctamente', 'ok')
+      loadSection('usuarios')
+    } catch (err) {
+      toast('Error al crear: ' + err.message, 'err')
+    }
+  }
+
+  window.dashDeleteCuenta = async function(idCuenta, email) {
+    const confirmed = await openModal(
+      'Eliminar cuenta',
+      `<p style="color:rgba(204,211,217,.78);line-height:1.7;margin-bottom:1rem">
+        Introduce la contraseña de <strong style="color:var(--mist-deep)">${esc(email)}</strong>:
+      </p>
+      <div class="dash-input-group">
+        <label>Contraseña</label>
+        <input class="dash-input" id="deleteCuentaPass" type="password" placeholder="Contraseña del usuario" />
+      </div>`,
+      'Eliminar cuenta', true
+    )
+    if (!confirmed) return
+    const password = document.getElementById('deleteCuentaPass')?.value?.trim()
+    if (!password) return toast('La contraseña es obligatoria', 'err')
+    try {
+      const r = await fetch(`${API_BASE}/cuentas/${idCuenta}?password=${encodeURIComponent(password)}`, { method: 'DELETE' })
+      if (!r.ok) throw new Error(`HTTP ${r.status}`)
+      toast('Cuenta eliminada', 'ok')
+      dashVerUsuario(email)
+    } catch (err) {
+      toast('Error: ' + err.message, 'err')
+    }
+  }
+
+  window.dashCambiarPlan = async function(email, plan) {
+    try {
+      const planData = await fetch(`${API_BASE}/planes/${plan}`).then(r => r.json())
+      const r = await fetch(`${API_BASE}/pagos/${encodeURIComponent(email)}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombrePlan: plan, importe: planData.precio ?? 0 })
+      })
+      if (!r.ok) throw new Error(`HTTP ${r.status}`)
+      toast(`Plan cambiado a ${plan}`, 'ok')
+      dashVerUsuario(email)
+    } catch (err) {
+      toast('Error al cambiar plan: ' + err.message, 'err')
+    }
+  }
+
+  async function sectionPagos(content) {
+    try {
+      const usuarios = await fetch(`${API_BASE}/usuarios`).then(r => r.json())
   
-    function sectionAnalytics() {
-      return `
+      const pagosPromises = usuarios.map(u =>
+        fetch(`${API_BASE}/pagos/${encodeURIComponent(u.email)}`)
+          .then(r => r.ok ? r.json() : [])
+          .then(pagos => (Array.isArray(pagos) ? pagos : []).map(p => ({
+            ...p, emailUsuario: u.email
+          })))
+          .catch(() => [])
+      )
+  
+      const allPagos = (await Promise.all(pagosPromises)).flat()
+        .sort((a, b) => new Date(b.fecha || b.fechaPago || 0) - new Date(a.fecha || a.fechaPago || 0))
+  
+      const total = allPagos.reduce((s, p) => s + Number(p.importe || 0), 0)
+  
+      const porUsuario = {}
+      allPagos.forEach(p => {
+        if (!porUsuario[p.emailUsuario]) porUsuario[p.emailUsuario] = { count: 0, total: 0 }
+        porUsuario[p.emailUsuario].count++
+        porUsuario[p.emailUsuario].total += Number(p.importe || 0)
+      })
+      const topUsuario = Object.entries(porUsuario).sort((a,b) => b[1].total - a[1].total)[0]
+  
+      const rows = allPagos.length
+        ? allPagos.map(p => `
+          <tr>
+            <td>
+              <div style="display:flex;align-items:center;gap:.6rem">
+                ${avatar(p.emailUsuario)}
+                <div style="font-size:.72rem;opacity:.7">${esc(p.emailUsuario)}</div>
+              </div>
+            </td>
+            <td>${badge(p.plan || p.nombrePlan || '—')}</td>
+            <td style="font-weight:700;color:var(--mist-deep)">${money(p.importe)}</td>
+            <td style="opacity:.6;font-size:.8rem">${fmt(p.fecha || p.fechaPago)}</td>
+          </tr>
+        `).join('')
+        : `<tr><td colspan="4" style="text-align:center;opacity:.4;padding:2rem">Sin pagos registrados</td></tr>`
+  
+      content.innerHTML = `
         <div class="dash-section">
           <div class="dash-section-head">
-            <div class="eyebrow">Metricas</div>
-            <h2>Analitica Avanzada</h2>
-            <p>Metricas detalladas y tendencias de consumo</p>
+            <div class="eyebrow">Historial</div>
+            <h2>Pagos</h2>
+            <p>${allPagos.length} pago${allPagos.length !== 1 ? 's' : ''} · Total: <strong style="color:var(--mist-deep)">${money(total)}</strong></p>
           </div>
   
-          <div class="dash-grid dash-grid-2">
-            <div class="dash-card">
-              <div class="eyebrow dash-mb-2">Distribucion</div>
-              <h3 style="font-size:1rem;font-weight:700;margin-bottom:1rem;">Ventas por Genero</h3>
-              <div class="dash-chart-placeholder">
-                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-                  <rect x="2" y="3" width="4" height="18" rx="1"/><rect x="9" y="8" width="4" height="13" rx="1"/><rect x="16" y="5" width="4" height="16" rx="1"/>
-                </svg>
-                <span>Grafica de barras — requiere libreria de charts</span>
-              </div>
+          <div class="dash-grid dash-grid-3" style="margin-bottom:1rem">
+            <div class="dash-stat">
+              <div class="dash-stat-label">Total recaudado</div>
+              <div class="dash-stat-value">${money(total)}</div>
             </div>
+            <div class="dash-stat">
+              <div class="dash-stat-label">Nº de pagos</div>
+              <div class="dash-stat-value">${allPagos.length}</div>
+            </div>
+            <div class="dash-stat">
+              <div class="dash-stat-label">Mayor cliente</div>
+              <div class="dash-stat-value" style="font-size:.95rem;word-break:break-all">
+                ${topUsuario ? esc(topUsuario[0]) : '—'}
+              </div>
+              ${topUsuario ? `<div style="font-size:.75rem;opacity:.5;margin-top:.2rem">${money(topUsuario[1].total)} · ${topUsuario[1].count} pago${topUsuario[1].count!==1?'s':''}</div>` : ''}
+            </div>
+          </div>
   
-            <div class="dash-card">
-              <div class="eyebrow dash-mb-2">Evolucion</div>
-              <h3 style="font-size:1rem;font-weight:700;margin-bottom:1rem;">Tendencias de Consumo</h3>
-              <div class="dash-chart-placeholder">
-                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-                  <path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/>
-                </svg>
-                <span>Grafica de lineas — requiere libreria de charts</span>
-              </div>
-            </div>
+          <div class="dash-table-wrap">
+            <table>
+              <thead>
+                <tr><th>Usuario</th><th>Plan</th><th>Importe</th><th>Fecha</th></tr>
+              </thead>
+              <tbody>${rows}</tbody>
+            </table>
           </div>
         </div>
       `
+    } catch (err) {
+      content.innerHTML = errorMsg('No se pudieron cargar los pagos: ' + err.message)
     }
+  }
+
+
+  window.dashRegistrarPago = async function(emailPrefill) {
+
+    const planes = await fetch(`${API_BASE}/planes`).then(r => r.json()).catch(() => [])
+    const opcionesPlanes = planes.map(p => `
+      <option value="${esc(p.nombrePlan || p.nombre)}" data-precio="${p.precio ?? 0}">
+        ${esc(p.nombrePlan || p.nombre)} — ${Number(p.precio || 0).toLocaleString('es-ES', { style:'currency', currency:'EUR' })}
+      </option>
+    `).join('')
   
-    function sectionCarts() {
-      const cards = mockData.carts.map((cart) => {
-        const itemsHtml = cart.items.map((item) => `
-          <div class="dash-cart-item">
-            <div class="dash-cart-item-head">
-              <span class="dash-cart-item-title">${esc(item.title)}</span>
-              <span class="dash-cart-item-price">$${item.price.toFixed(2)}</span>
-            </div>
-            <div class="dash-cart-item-meta">Anadido: ${esc(item.addedAt)}</div>
-          </div>
-        `).join('')
+    const confirmed = await openModal(
+      'Registrar pago',
+      `<div class="dash-input-group">
+        <label>Email del usuario</label>
+        <input class="dash-input" id="pagoEmail" type="email" value="${esc(emailPrefill)}" placeholder="usuario@ejemplo.com" />
+      </div>
+      <div class="dash-input-group">
+        <label>Plan</label>
+        <select class="dash-input" id="pagoPlan">
+          ${opcionesPlanes}
+        </select>
+      </div>`,
+      'Registrar', false
+    )
+    if (!confirmed) return
   
+    const email = document.getElementById('pagoEmail')?.value?.trim()
+    const select = document.getElementById('pagoPlan')
+    const plan = select?.value
+    const importe = parseFloat(select?.selectedOptions[0]?.dataset.precio || 0)
+  
+    if (!email) return toast('El email es obligatorio', 'err')
+  
+    try {
+      const r = await fetch(`${API_BASE}/pagos/${encodeURIComponent(email)}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombrePlan: plan, importe })
+      })
+      if (!r.ok) throw new Error(`HTTP ${r.status}`)
+      toast('Pago registrado correctamente', 'ok')
+      loadSection('pagos')
+    } catch (err) {
+      toast('Error al registrar pago: ' + err.message, 'err')
+    }
+  }
+
+
+  async function sectionPlanes(content) {
+    try {
+      const [planes, usuarios] = await Promise.all([
+        fetch(`${API_BASE}/planes`).then(r => {
+          if (!r.ok) throw new Error(`HTTP ${r.status}`)
+          return r.json()
+        }),
+        fetch(`${API_BASE}/usuarios`).then(r => r.ok ? r.json() : []),
+      ])
+
+      const conteo = {}
+      usuarios.forEach(u => {
+        const p = u.nombrePlan || 'GRATIS'
+        conteo[p] = (conteo[p] || 0) + 1
+      })
+
+      const cards = planes.map(p => {
+        const nombre = p.nombrePlan || p.nombre || '—'
+        const count  = conteo[nombre] || 0
         return `
-          <div class="dash-card">
-            <div class="dash-flex dash-items-c dash-gap-2 dash-mb-3">
-              ${avatar(cart.userName, '36px')}
+          <div class="dash-stat" style="border-left:3px solid var(--mist-deep)">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.75rem">
               <div>
-                <div style="font-size:.875rem;font-weight:600">${esc(cart.userName)}</div>
-                <div style="font-size:.72rem;color:var(--slate)">${esc(cart.userEmail)}</div>
+                <div class="eyebrow" style="margin-bottom:.3rem">${esc(nombre)}</div>
+                <div style="font-size:2rem;font-weight:700;letter-spacing:-0.04em;color:var(--mist-deep)">
+                  ${p.precio != null ? money(p.precio) : '—'}
+                  <span style="font-size:.875rem;font-weight:400;opacity:.5">/mes</span>
+                </div>
               </div>
+              ${badge(nombre)}
             </div>
-  
-            <div style="font-size:.7rem;color:var(--slate);margin-bottom:.65rem;text-transform:uppercase;letter-spacing:.12em">
-              ${cart.items.length} ${cart.items.length === 1 ? 'producto' : 'productos'}
-              &nbsp;·&nbsp; actualizado ${esc(cart.lastUpdate)}
+            ${p.descripcion ? `<p style="font-size:.82rem;opacity:.6;line-height:1.6;margin-bottom:.75rem">${esc(p.descripcion)}</p>` : ''}
+            <div style="font-size:.75rem;opacity:.5;border-top:1px solid rgba(204,211,217,.1);padding-top:.75rem;margin-bottom:.75rem">
+              ${p.maxPerfiles != null ? `Hasta ${p.maxPerfiles} perfil${p.maxPerfiles !== 1 ? 'es' : ''}` : ''}
+              ${p.conAnuncios != null ? ` · ${p.conAnuncios ? 'Con anuncios' : 'Sin anuncios'}` : ''}
             </div>
-  
-            ${itemsHtml}
-  
-            <div class="dash-cart-total">
-              <span class="dash-cart-total-label">Total</span>
-              <span class="dash-cart-total-value">$${cart.total.toFixed(2)}</span>
-            </div>
-  
-            <div class="dash-flex dash-gap-2 dash-mt-3">
-              <button class="dash-btn dash-btn--secondary" style="flex:1" onclick="dashEditCart(${cart.id})">
-                ${iconEdit()} Editar
-              </button>
-              <button class="dash-btn dash-btn--danger" onclick="dashDeleteCart(${cart.id})">
-                ${iconTrash()}
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <span style="font-size:.75rem;color:rgba(204,211,217,.5)">${count} usuario${count!==1?'s':''}</span>
+              <button class="dash-btn dash-btn--sm dash-btn--secondary"
+                onclick="dashEditarPlan('${esc(nombre)}', ${p.precio ?? 0})">
+                Editar precio
               </button>
             </div>
           </div>
         `
       }).join('')
-  
-      return `
+
+      const totalUsuarios = usuarios.length
+      const ingresos = planes.reduce((s, p) => s + (p.precio || 0) * (conteo[p.nombrePlan || p.nombre] || 0), 0)
+
+      content.innerHTML = `
         <div class="dash-section">
           <div class="dash-section-head">
-            <div class="eyebrow">Usuarios</div>
-            <h2>Gestion de Carritos</h2>
-            <p>Visualiza, modifica y elimina carritos de usuarios</p>
+            <div class="eyebrow">Suscripciones</div>
+            <h2>Planes</h2>
+            <p>${planes.length} plan${planes.length !== 1 ? 'es' : ''} disponibles</p>
           </div>
-          <div class="dash-grid dash-grid-3">${cards}</div>
-        </div>
-      `
-    }
-  
-    function sectionSettings() {
-      return `
-        <div class="dash-section">
-          <div class="dash-section-head">
-            <div class="eyebrow">Sistema</div>
-            <h2>Configuracion</h2>
-            <p>Ajustes generales de la plataforma</p>
-          </div>
-  
-          <div class="dash-grid dash-grid-2">
-            <div class="dash-card">
-              <div class="eyebrow dash-mb-2">Permisos</div>
-              <h3 style="font-size:1rem;font-weight:700;margin-bottom:1rem;">Gestion de Roles</h3>
-              <div class="dash-input-group">
-                <label>Administrador — 3 usuarios</label>
-                <div style="padding:.7rem 1rem;background:rgba(2,51,52,.04);border-radius:var(--radius-md);font-size:.82rem;color:var(--slate)">
-                  Acceso completo al sistema
-                </div>
-              </div>
-              <div class="dash-input-group">
-                <label>Soporte — 8 usuarios</label>
-                <div style="padding:.7rem 1rem;background:rgba(2,51,52,.04);border-radius:var(--radius-md);font-size:.82rem;color:var(--slate)">
-                  Solo lectura + gestion de usuarios
-                </div>
+
+          <div class="dash-grid dash-grid-3" style="margin-bottom:1rem">
+            <div class="dash-stat">
+              <div class="dash-stat-label">Usuarios totales</div>
+              <div class="dash-stat-value">${totalUsuarios}</div>
+            </div>
+            <div class="dash-stat">
+              <div class="dash-stat-label">Ingresos mensuales est.</div>
+              <div class="dash-stat-value">${money(ingresos)}</div>
+            </div>
+            <div class="dash-stat">
+              <div class="dash-stat-label">Plan más popular</div>
+              <div class="dash-stat-value" style="font-size:1.1rem">
+                ${Object.entries(conteo).sort((a,b)=>b[1]-a[1])[0]?.[0] || '—'}
               </div>
             </div>
-  
-            <div class="dash-card">
-              <div class="eyebrow dash-mb-2">Precios</div>
-              <h3 style="font-size:1rem;font-weight:700;margin-bottom:1rem;">Configuracion de Precios</h3>
-              <div class="dash-input-group">
-                <label>Precio base peliculas</label>
-                <input type="text" class="dash-input" value="$8.99" />
-              </div>
-              <div class="dash-input-group">
-                <label>Precio base series</label>
-                <input type="text" class="dash-input" value="$9.99" />
-              </div>
-              <button class="dash-btn dash-btn--primary dash-mt-2">Guardar Cambios</button>
-            </div>
           </div>
+
+          <div class="dash-grid dash-grid-4">${cards}</div>
         </div>
       `
+    } catch (err) {
+      content.innerHTML = errorMsg('No se pudieron cargar los planes: ' + err.message)
     }
-  
-    function sectionSecurity() {
-      return `
-        <div class="dash-section">
-          <div class="dash-section-head">
-            <div class="eyebrow">Monitoreo</div>
-            <h2>Seguridad</h2>
-            <p>Logs y alertas de actividad del sistema</p>
+  }
+
+  window.dashEditarPlan = async function(nombrePlan, precioActual) {
+    const confirmed = await openModal(
+      `Editar precio: ${nombrePlan}`,
+      `<div class="dash-input-group">
+        <label>Nuevo precio mensual (€)</label>
+        <input class="dash-input" id="nuevoPrecio" type="number" min="0" step="0.01" value="${precioActual}" />
+      </div>`,
+      'Guardar', false
+    )
+    if (!confirmed) return
+    const precio = parseFloat(document.getElementById('nuevoPrecio')?.value)
+    if (isNaN(precio) || precio < 0) return toast('Precio inválido', 'err')
+    try {
+      const r = await fetch(`${API_BASE}/planes/${encodeURIComponent(nombrePlan)}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ precio })
+      })
+      if (!r.ok) throw new Error(`HTTP ${r.status}`)
+      toast(`Precio de ${nombrePlan} actualizado`, 'ok')
+      loadSection('planes')
+    } catch (err) {
+      toast('Error al actualizar: ' + err.message, 'err')
+    }
+  }
+
+  // ── INIT ─────────────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
+
+    const user = JSON.parse(localStorage.getItem('JAM_user') || 'null')
+    if (!user?.email || user?.tipoUsuario !== 'ADMIN') {
+      window.location.href = './landing.html'
+      return
+    }
+
+    document.body.insertAdjacentHTML('beforeend', `
+      <div id="dashGenericModal" class="dash-modal">
+        <div class="dash-modal-inner">
+          <div class="dash-modal-head">
+            <h3></h3>
+            <button class="dash-modal-close" onclick="closeModal(false)" aria-label="Cerrar">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="m6 6 12 12"/><path d="M18 6 6 18"/>
+              </svg>
+            </button>
           </div>
-  
-          <div class="dash-grid dash-grid-3 dash-mb-4">
-            ${statCard('Eventos (24h)',     '12', 'up',   '↑ 3', iconShield())}
-            ${statCard('Intentos Fallidos', '8',  'down', '↓ 2', iconLock())}
-            ${statCard('IPs Bloqueadas',    '3',  'up',   '↑ 1', iconWarn())}
-          </div>
-  
-          <div class="dash-card">
-            <div class="eyebrow dash-mb-2">Registro</div>
-            <h3 style="font-size:1rem;font-weight:700;margin-bottom:1rem;">Actividad Reciente</h3>
-            <div class="dash-table-wrap">
-              <table>
-                <thead>
-                  <tr><th>Usuario</th><th>Accion</th><th>IP</th><th>Hora</th><th>Estado</th></tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td style="font-weight:500;font-size:.82rem">admin@jamajo.com</td>
-                    <td style="color:var(--slate)">Inicio de sesion</td>
-                    <td><span class="dash-mono">192.168.1.1</span></td>
-                    <td style="color:var(--slate);font-size:.8rem">2026-04-21 14:32</td>
-                    <td>${badge('completed')}</td>
-                  </tr>
-                  <tr>
-                    <td style="font-weight:500;font-size:.82rem">editor@jamajo.com</td>
-                    <td style="color:var(--slate)">Actualizacion de contenido</td>
-                    <td><span class="dash-mono">192.168.1.45</span></td>
-                    <td style="color:var(--slate);font-size:.8rem">2026-04-21 14:15</td>
-                    <td>${badge('completed')}</td>
-                  </tr>
-                  <tr>
-                    <td style="font-weight:500;font-size:.82rem">unknown@example.com</td>
-                    <td style="color:var(--slate)">Intento de acceso fallido</td>
-                    <td><span class="dash-mono">203.45.67.89</span></td>
-                    <td style="color:var(--slate);font-size:.8rem">2026-04-21 13:58</td>
-                    <td>${badge('failed')}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <div class="dash-modal-body"></div>
+          <div style="display:flex;justify-content:flex-end;gap:.5rem;padding:1rem 1.5rem;border-top:1px solid rgba(204,211,217,.1)">
+            <button class="dash-btn dash-btn--ghost" onclick="closeModal(false)">Cancelar</button>
+            <button class="dash-btn dash-btn--primary dash-modal-confirm" onclick="closeModal(true)">Confirmar</button>
           </div>
         </div>
-      `
-    }
-  
-    // ============================================================
-    // CARRITO — MODAL
-    // ============================================================
-  
-    // Expuestas globalmente para los onclick inline
-    window.dashEditCart = function (cartId) {
-      const cart = mockData.carts.find((c) => c.id === cartId)
-      if (!cart) return
-  
-      const itemsHtml = cart.items.map((item, index) => `
-        <div class="dash-cart-item dash-flex dash-items-c dash-justify-btw">
-          <div>
-            <div class="dash-cart-item-title">${esc(item.title)}</div>
-            <div class="dash-cart-item-meta">$${item.price.toFixed(2)}</div>
-          </div>
-          <button class="dash-btn dash-btn--danger dash-btn--sm"
-            onclick="dashRemoveCartItem(${cartId}, ${index})">
-            Eliminar
-          </button>
-        </div>
-      `).join('')
-  
-      document.getElementById('cartModalBody').innerHTML = `
-        <div class="dash-mb-3">
-          <div class="eyebrow" style="margin-bottom:.25rem">Carrito de</div>
-          <div style="font-size:1rem;font-weight:700">${esc(cart.userName)}</div>
-          <div style="font-size:.78rem;color:var(--slate)">${esc(cart.userEmail)}</div>
-        </div>
-  
-        ${itemsHtml}
-  
-        <div class="dash-cart-total dash-mb-3">
-          <span class="dash-cart-total-label">Total</span>
-          <span class="dash-cart-total-value">$${cart.total.toFixed(2)}</span>
-        </div>
-  
-        <div class="dash-flex dash-gap-2">
-          <button class="dash-btn dash-btn--secondary" style="flex:1" onclick="closeCartModal()">Cerrar</button>
-          <button class="dash-btn dash-btn--primary"   style="flex:1" onclick="dashSaveCart(${cartId})">Guardar</button>
-        </div>
-      `
-  
-      document.getElementById('cartModal').classList.add('active')
-    }
-  
-    window.dashRemoveCartItem = function (cartId, index) {
-      const cart = mockData.carts.find((c) => c.id === cartId)
-      if (!cart) return
-      cart.items.splice(index, 1)
-      cart.total = cart.items.reduce((s, i) => s + i.price, 0)
-      window.dashEditCart(cartId)
-    }
-  
-    window.dashSaveCart = function (cartId) {
-      alert('Cambios guardados correctamente')
-      closeCartModal()
-      loadSection('carts')
-    }
-  
-    window.dashDeleteCart = function (cartId) {
-      if (!confirm('Eliminar este carrito? Esta accion no se puede deshacer.')) return
-      const idx = mockData.carts.findIndex((c) => c.id === cartId)
-      if (idx !== -1) {
-        mockData.carts.splice(idx, 1)
-        loadSection('carts')
-      }
-    }
-  
-    window.closeCartModal = function () {
-      document.getElementById('cartModal').classList.remove('active')
-    }
-  
-    // Cerrar modal al clicar backdrop
-    document.addEventListener('click', (e) => {
-      const modal = document.getElementById('cartModal')
-      if (modal && e.target === modal) window.closeCartModal()
-    })
-  
-    // ============================================================
-    // MINI SVG ICONS
-    // ============================================================
-  
-    function iconUsers()    { return `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>` }
-    function iconMoney()    { return `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>` }
-    function iconBag()      { return `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>` }
-    function iconConv()     { return `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m22 12-4-4-4 4"/><path d="M18 8v8"/><path d="m2 12 4 4 4-4"/><path d="M6 16V8"/></svg>` }
-    function iconShield()   { return `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>` }
-    function iconLock()     { return `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>` }
-    function iconWarn()     { return `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>` }
-    function iconPlus()     { return `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14"/><path d="M12 5v14"/></svg>` }
-    function iconDownload() { return `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>` }
-    function iconEdit()     { return `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>` }
-    function iconTrash()    { return `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>` }
-  
-    // ============================================================
-    // INIT — mismo patron que index.js: espera DOMContentLoaded
-    // ============================================================
-  
-    document.addEventListener('DOMContentLoaded', () => {
-      // script.js ya ha renderizado header y footer para este momento
-      bindNav()
-      loadSection('overview')
-    })
-  })()
+      </div>
+    `)
+
+    window.closeModal = closeModal
+    bindNav()
+    loadSection('usuarios')
+  })
+})()

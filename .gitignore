@@ -54,3 +54,6 @@ out/
 # Git history / accidental files
 # =========================
 *.tmp
+
+SQL/ConstuirScriptSQL/output.sql
+SQL/ConstuirScriptSQL/output.sql

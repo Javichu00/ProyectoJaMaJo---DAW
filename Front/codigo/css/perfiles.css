@@ -1,0 +1,401 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700&display=swap');
+
+.profiles-page {
+  min-height: 100vh;
+  padding: 56px 20px 40px;
+  background:
+    radial-gradient(circle at 14% 12%, rgba(255, 27, 28, 0.16), transparent 28rem),
+    radial-gradient(circle at 84% 4%, rgba(255, 127, 17, 0.16), transparent 30rem),
+    linear-gradient(180deg, rgba(21, 18, 15, 0.94) 0%, rgba(0, 0, 0, 1) 100%);
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  gap: 28px;
+  font-family: 'Lato', sans-serif;
+}
+
+.profiles-page__brand img {
+  width: 72px;
+  height: auto;
+  object-fit: contain;
+}
+
+.profiles-shell {
+  width: min(960px, 100%);
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+}
+
+.profiles-shell__eyebrow {
+  margin: 0 0 10px;
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(190, 183, 164, 0.6);
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+}
+
+.profiles-shell__title {
+  margin: 0;
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: 400;
+  color: #FFFFFC;
+}
+
+.profiles-shell__subtitle {
+  width: min(640px, 100%);
+  margin: 16px auto 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(190, 183, 164, 0.68);
+  font-weight: 300;
+}
+
+.profiles-shell__status,
+.profiles-shell__feedback {
+  margin: 12px auto 0;
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
+.profiles-shell__status {
+  color: rgba(190, 183, 164, 0.54);
+  font-weight: 300;
+}
+
+.profiles-shell__feedback--error {
+  color: rgba(255, 120, 120, 0.92);
+}
+
+.profiles-grid {
+  margin-top: 48px;
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.profiles-card,
+.profiles-add-card {
+  min-height: unset;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 14px;
+  text-align: center;
+  width: 160px;
+  transition: transform 0.18s ease;
+  cursor: pointer;
+}
+
+.profiles-card:hover,
+.profiles-add-card:hover {
+  transform: scale(1.05);
+  border-color: transparent;
+  background: transparent;
+}
+
+.profiles-card.is-active {
+  border-color: transparent;
+  background: transparent;
+}
+
+.profiles-card.is-locked {
+  cursor: default;
+}
+
+.profiles-avatar {
+  width: 160px;
+  height: 160px;
+  border-radius: 8px;
+  border: 3px solid transparent;
+  object-fit: cover;
+  transition: border-color 0.18s ease;
+}
+
+.profiles-card:hover .profiles-avatar,
+.profiles-card.is-active .profiles-avatar {
+  border-color: #FF7F11;
+  box-shadow: 0 0 0 2px rgba(255, 27, 28, 0.28), 0 18px 36px rgba(0, 0, 0, 0.34);
+}
+
+.profiles-card__name {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: rgba(190, 183, 164, 0.75);
+  font-family: 'Lato', sans-serif;
+}
+
+.profiles-card:hover .profiles-card__name,
+.profiles-card.is-active .profiles-card__name {
+  color: #FFFFFC;
+}
+
+.profiles-card__meta,
+.profiles-card__pill {
+  display: none;
+}
+
+.profiles-add-card {
+  width: 160px;
+}
+
+.profiles-add-card__icon {
+  width: 160px;
+  height: 160px;
+  border-radius: 8px;
+  border: 2px dashed rgba(255, 127, 17, 0.36);
+  background: rgba(255, 127, 17, 0.08);
+  display: grid;
+  place-content: center;
+  color: rgba(190, 183, 164, 0.6);
+  font-size: 3rem;
+  transition: border-color 0.18s ease, color 0.18s ease;
+}
+
+.profiles-add-card:hover .profiles-add-card__icon {
+  border-color: rgba(255, 127, 17, 0.74);
+  color: #FFFFFC;
+  background: rgba(255, 127, 17, 0.14);
+}
+
+.profiles-add-card__title {
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(190, 183, 164, 0.75);
+  font-family: 'Lato', sans-serif;
+  letter-spacing: 0.08em;
+}
+
+.profiles-add-card__meta {
+  display: none;
+}
+
+.profiles-actions {
+  margin-top: 28px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.profiles-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 28px;
+  border: 0;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #FF7F11, #FF1B1C);
+  color: #000000;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: 'Lato', sans-serif;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.profiles-btn--ghost {
+  border: 1px solid rgba(190, 183, 164, 0.28);
+  background: transparent;
+  color: rgba(190, 183, 164, 0.82);
+}
+
+.profiles-btn--ghost:hover {
+  border-color: rgba(255, 127, 17, 0.48);
+  background: rgba(255, 127, 17, 0.12);
+  color: #FFFFFC;
+}
+
+.profiles-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+  font-family: 'Lato', sans-serif;
+}
+
+.profiles-modal.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.profiles-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(8px);
+}
+
+.profiles-modal__box {
+  position: relative;
+  z-index: 1;
+  width: min(520px, 100%);
+  padding: 32px 28px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 127, 17, 0.24);
+  background:
+    radial-gradient(circle at top right, rgba(255, 27, 28, 0.18), transparent 44%),
+    linear-gradient(180deg, rgba(21, 18, 15, 0.98) 0%, rgba(0, 0, 0, 0.99) 100%);
+}
+
+.profiles-modal__header {
+  margin-bottom: 22px;
+}
+
+.profiles-modal__eyebrow {
+  margin: 0 0 8px;
+  font-size: 0.68rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(190, 183, 164, 0.45);
+  font-weight: 300;
+}
+
+.profiles-modal__title {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  font-family: 'Bebas Neue', sans-serif;
+  color: #FFFFFC;
+}
+
+.profiles-modal__desc {
+  margin: 10px 0 0;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: rgba(190, 183, 164, 0.55);
+  font-weight: 300;
+}
+
+.profiles-modal__field {
+  display: grid;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.profiles-modal__label {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(190, 183, 164, 0.45);
+  font-weight: 400;
+}
+
+.profiles-modal__input {
+  min-height: 48px;
+  border-radius: 4px;
+  border: 1px solid rgba(190, 183, 164, 0.18);
+  background: rgba(0, 0, 0, 0.34);
+  color: rgba(190, 183, 164, 0.92);
+  padding: 0 16px;
+  outline: none;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.95rem;
+  transition: border-color 0.18s ease;
+}
+
+.profiles-modal__input:focus {
+  border-color: rgba(255, 127, 17, 0.58);
+  box-shadow: 0 0 0 3px rgba(255, 127, 17, 0.12);
+}
+
+.profiles-avatar-picker {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.profiles-avatar-chip {
+  padding: 0;
+  border-radius: 6px;
+  border: 3px solid transparent;
+  background: transparent;
+  display: grid;
+  justify-items: center;
+  gap: 0;
+  cursor: pointer;
+  transition: border-color 0.18s ease, transform 0.18s ease;
+  overflow: hidden;
+}
+
+.profiles-avatar-chip:hover {
+  transform: scale(1.04);
+  border-color: rgba(255, 127, 17, 0.5);
+}
+
+.profiles-avatar-chip.is-selected {
+  border-color: #FF7F11;
+}
+
+.profiles-avatar-chip__preview {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 3px;
+  object-fit: cover;
+  display: block;
+}
+
+.profiles-avatar-chip__label {
+  display: none;
+}
+
+.profiles-modal__actions {
+  margin-top: 26px;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.profiles-modal__actions .profiles-btn[hidden] {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .profiles-page {
+    padding: 28px 16px;
+  }
+
+  .profiles-grid {
+    gap: 16px;
+  }
+
+  .profiles-card,
+  .profiles-add-card {
+    width: 120px;
+  }
+
+  .profiles-avatar,
+  .profiles-add-card__icon {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+.profiles-modal__header {
+  display: none;
+}
+
+.profiles-shell__subtitle {
+  display: none;
+}
